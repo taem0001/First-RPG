@@ -7,19 +7,24 @@ import java.io.IOException;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import helper.Helper;
+import main.GamePanel;
 import java.awt.*;
 
 public class TileManager {
     private Tile[] tiles;
     private int tileMap[][];
-    private Helper helper = new Helper();
 
-    public TileManager() {
-        tiles = new Tile[2];
-        tileMap = new int[helper.getMAXROW()][helper.getMAXCOL()];
+    private Helper helper = new Helper();
+    private GamePanel gamePanel;
+
+    public TileManager(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+
+        tiles = new Tile[3];
+        tileMap = new int[helper.getMAXWORLDCOL()][helper.getMAXWORLDROW()];
 
         loadTiles();
-        loadTileMap();
+        loadTileMap("../res/levels/Map2.csv");
     }
 
     private void loadTiles() {
@@ -39,11 +44,11 @@ public class TileManager {
         }
     }
 
-    private void loadTileMap() {
+    private void loadTileMap(String url) {
         try {
-            Scanner mapLoader = new Scanner(new File("../res/levels/Map1.txt"));
+            Scanner mapLoader = new Scanner(new File(url));
             int i = 0;
-            
+
             while (mapLoader.hasNextLine() && i < tileMap.length) {
                 String line = mapLoader.nextLine();
 
@@ -61,13 +66,19 @@ public class TileManager {
     }
 
     public void draw(Graphics g) {
-        int m = helper.getMAXROW();
-        int n = helper.getMAXCOL();
+        int m = helper.getMAXWORLDROW();
+        int n = helper.getMAXWORLDCOL();
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 int tileNum = tileMap[i][j];
-                g.drawImage(tiles[tileNum].getImage(), j * helper.getTILESIZE(), i * helper.getTILESIZE(),
+
+                int worldX = j * helper.getTILESIZE();
+                int worldY = i * helper.getTILESIZE();
+                int screenX = worldX - gamePanel.getPlayer().getWorldX() + gamePanel.getPlayer().getSCREENX();
+                int screenY = worldY - gamePanel.getPlayer().getWorldY() + gamePanel.getPlayer().getSCREENY();
+
+                g.drawImage(tiles[tileNum].getImage(), screenX, screenY,
                         helper.getTILESIZE(), helper.getTILESIZE(), null);
             }
         }

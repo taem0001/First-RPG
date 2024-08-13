@@ -5,8 +5,12 @@ public class Helper {
     private final int SCREENHEIGHT = 480;
     private final int TILESIZE = 32;
     private final int CHUNKSIZE = 16;
-    private final int MAXCOL = SCREENWIDTH / TILESIZE;
-    private final int MAXROW = SCREENHEIGHT / TILESIZE;
+    private final int MAXSCREENCOL = SCREENWIDTH / TILESIZE;
+    private final int MAXSCREENROW = SCREENHEIGHT / TILESIZE;
+    private final int MAXWORLDCOL = 60;
+    private final int MAXWORLDROW = 60;
+    private final int WORLDWIDTH = MAXSCREENCOL * TILESIZE;
+    private final int WORLDHEIGHT = MAXSCREENROW * TILESIZE;
 
     public int getSCREENWIDTH() {
         return SCREENWIDTH;
@@ -24,11 +28,27 @@ public class Helper {
         return CHUNKSIZE;
     }
 
-    public int getMAXCOL() {
-        return MAXCOL;
+    public int getMAXSCREENCOL() {
+        return MAXSCREENCOL;
     }
 
-    public int getMAXROW() {
-        return MAXROW;
+    public int getMAXSCREENROW() {
+        return MAXSCREENROW;
+    }
+
+    public int getMAXWORLDCOL() {
+        return MAXWORLDCOL;
+    }
+
+    public int getMAXWORLDROW() {
+        return MAXWORLDROW;
+    }
+
+    public int getWORLDHEIGHT() {
+        return WORLDHEIGHT;
+    }
+
+    public int getWORLDWIDTH() {
+        return WORLDWIDTH;
     }
 }

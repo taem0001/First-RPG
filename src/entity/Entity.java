@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import helper.Helper;
 
 public abstract class Entity {
-    private int x, y;
+    private int worldX, worldY;
     private int speed;
 
     private BufferedImage[] sprites;
@@ -18,28 +18,28 @@ public abstract class Entity {
 
     private Helper helper = new Helper();
 
-    public void changeX(int n) {
-        x += n;
+    public void changeWorldX(int n) {
+        worldX += n;
     }
 
-    public void changeY(int n) {
-        y += n;
+    public void changeWorldY(int n) {
+        worldY += n;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public void setWorldX(int worldX) {
+        this.worldX = worldX;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void setWorldY(int worldY) {
+        this.worldY = worldY;
     }
 
-    public int getX() {
-        return x;
+    public int getWorldX() {
+        return worldX;
     }
 
-    public int getY() {
-        return y;
+    public int getWorldY() {
+        return worldY;
     }
 
     public void setSpeed(int n) {

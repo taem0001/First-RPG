@@ -10,9 +10,14 @@ public class Player extends Entity {
     private Helper helper = new Helper();
 
     private BufferedImage[] sprites;
+    private final int SCREENX;
+    private final int SCREENY;
 
     public Player(KeyHandler keyH) {
         this.keyH = keyH;
+
+        SCREENX = helper.getSCREENWIDTH() / 2;
+        SCREENY = helper.getSCREENHEIGHT() / 2;
 
         setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
@@ -20,8 +25,8 @@ public class Player extends Entity {
     }
 
     private void setDefaulValues() {
-        setX(helper.getSCREENWIDTH() / 2);
-        setY(helper.getSCREENHEIGHT() / 2);
+        setWorldX(30 * helper.getTILESIZE());
+        setWorldY(30 * helper.getTILESIZE());
         setSpeed(3);
         setDir("down");
     }
@@ -29,16 +34,16 @@ public class Player extends Entity {
     public void update() {
         if (keyH.getUp()) {
             setDir("up");
-            changeY(-getSpeed());
+            changeWorldY(-getSpeed());
         } else if (keyH.getDown()) {
             setDir("down");
-            changeY(getSpeed());
+            changeWorldY(getSpeed());
         } else if (keyH.getLeft()) {
             setDir("left");
-            changeX(-getSpeed());
+            changeWorldX(-getSpeed());
         } else if (keyH.getRight()) {
             setDir("right");
-            changeX(getSpeed());
+            changeWorldX(getSpeed());
         }
 
         incrementSpriteCounter();
@@ -114,6 +119,15 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g.drawImage(image, getX(), getY(), helper.getTILESIZE(), helper.getTILESIZE(), null);
+        g.drawImage(image, SCREENX - helper.getTILESIZE(), SCREENY - helper.getTILESIZE(), helper.getTILESIZE(),
+                helper.getTILESIZE(), null);
+    }
+
+    public int getSCREENX() {
+        return SCREENX;
+    }
+
+    public int getSCREENY() {
+        return SCREENY;
     }
 }
