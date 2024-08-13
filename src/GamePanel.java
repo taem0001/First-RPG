@@ -12,8 +12,8 @@ public class GamePanel extends JPanel implements Runnable {
     private int FPS = 60;
 
     // important objects
-    Player player = new Player(SCREENWIDTH / 2, SCREENHEIGHT / 2);
     KeyHandler keyH = new KeyHandler();
+    Player player = new Player(this, keyH);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
@@ -55,26 +55,26 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-        if (keyH.getUp()) {
-            player.changeY(-player.getSpeed());
-        }
-        if (keyH.getDown()) {
-            player.changeY(player.getSpeed());
-        }
-        if (keyH.getLeft()) {
-            player.changeX(-player.getSpeed());
-        }
-        if (keyH.getRight()) {
-            player.changeX(player.getSpeed());
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // draw player
-        g.setColor(Color.BLACK);
-        g.fillRect(player.getX() - TILESIZE, player.getY() - TILESIZE, TILESIZE, TILESIZE);
+        player.draw(g);
+
         g.dispose();
+    }
+
+    public int getSCREENWIDTH() {
+        return SCREENWIDTH;
+    }
+
+    public int getSCREENHEIGHT() {
+        return SCREENHEIGHT;
+    }
+
+    public int getTILESIZE() {
+        return TILESIZE;
     }
 }
