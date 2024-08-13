@@ -40,6 +40,17 @@ public class Player extends Entity {
             setDir("right");
             changeX(getSpeed());
         }
+
+        incrementSpriteCounter();
+
+        if (getSpriteCounter() > 10) {
+            if (getSpriteNum() < 4) {
+                incrementSpriteNum();
+            } else {
+                resetSpriteNum();
+            }
+            resetSpriteCounter();
+        }
     }
 
     public void draw(Graphics g) {
@@ -47,16 +58,60 @@ public class Player extends Entity {
 
         switch (getDir()) {
             case "up":
-                image = sprites[8];
+                if (getSpriteNum() == 1) {
+                    image = sprites[8];
+                }
+                if (getSpriteNum() == 2) {
+                    image = sprites[9];
+                }
+                if (getSpriteNum() == 3) {
+                    image = sprites[10];
+                }
+                if (getSpriteNum() == 4) {
+                    image = sprites[11];
+                }
                 break;
             case "down":
-                image = sprites[0];
+                if (getSpriteNum() == 1) {
+                    image = sprites[0];
+                }
+                if (getSpriteNum() == 2) {
+                    image = sprites[1];
+                }
+                if (getSpriteNum() == 3) {
+                    image = sprites[2];
+                }
+                if (getSpriteNum() == 4) {
+                    image = sprites[3];
+                }
                 break;
             case "left":
-                image = sprites[4];
+                if (getSpriteNum() == 1) {
+                    image = sprites[4];
+                }
+                if (getSpriteNum() == 2) {
+                    image = sprites[5];
+                }
+                if (getSpriteNum() == 3) {
+                    image = sprites[6];
+                }
+                if (getSpriteNum() == 4) {
+                    image = sprites[7];
+                }
                 break;
             case "right":
-                image = sprites[12];
+                if (getSpriteNum() == 1) {
+                    image = sprites[12];
+                }
+                if (getSpriteNum() == 2) {
+                    image = sprites[13];
+                }
+                if (getSpriteNum() == 3) {
+                    image = sprites[14];
+                }
+                if (getSpriteNum() == 4) {
+                    image = sprites[15];
+                }
                 break;
         }
         g.drawImage(image, getX(), getY(), gamePanel.getTILESIZE(), gamePanel.getTILESIZE(), null);

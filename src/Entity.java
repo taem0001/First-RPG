@@ -11,6 +11,9 @@ public abstract class Entity {
     private BufferedImage[] sprites;
     private String dir;
 
+    private int spriteCounter = 0;
+    private int spriteNum = 1;
+
     public void changeX(int n) {
         x += n;
     }
@@ -76,5 +79,29 @@ public abstract class Entity {
 
     public BufferedImage[] getSprites() {
         return sprites;
+    }
+
+    public int getSpriteCounter() {
+        return spriteCounter;
+    }
+
+    public int getSpriteNum() {
+        return spriteNum;
+    }
+
+    public void incrementSpriteCounter() {
+        spriteCounter++;
+    }
+
+    public void incrementSpriteNum() {
+        spriteNum++;
+    }
+
+    public void resetSpriteCounter() {
+        spriteCounter = 0;
+    }
+
+    public void resetSpriteNum() {
+        spriteNum = 1;
     }
 }
