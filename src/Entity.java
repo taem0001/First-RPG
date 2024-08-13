@@ -1,6 +1,6 @@
 public abstract class Entity {
-    private int x;
-    private int y;
+    private int x, y;
+    private int speed;
 
     public void changeX(int n) {
         x += n;
@@ -24,5 +24,13 @@ public abstract class Entity {
 
     public int getY() {
         return y;
+    }
+
+    public void setSpeed(int n) {
+        speed = n;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }

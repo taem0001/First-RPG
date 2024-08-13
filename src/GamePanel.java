@@ -12,11 +12,13 @@ public class GamePanel extends JPanel implements Runnable {
     private int FPS = 60;
 
     // important objects
-    Player player;
+    Player player = new Player(SCREENWIDTH / 2, SCREENHEIGHT / 2);
+    KeyHandler keyH = new KeyHandler();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
         this.setDoubleBuffered(true);
+        this.addKeyListener(keyH);
         this.setFocusable(true);
     }
 
@@ -53,7 +55,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-
+        if (keyH.getUp()) {
+            player.changeY(-player.getSpeed());
+        }
+        if (keyH.getDown()) {
+            player.changeY(player.getSpeed());
+        }
+        if (keyH.getLeft()) {
+            player.changeX(-player.getSpeed());
+        }
+        if (keyH.getRight()) {
+            player.changeX(player.getSpeed());
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -61,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         // draw player
         g.setColor(Color.BLACK);
-        g.fillRect(200, 200, TILESIZE, TILESIZE);
+        g.fillRect(player.getX() - TILESIZE, player.getY() - TILESIZE, TILESIZE, TILESIZE);
         g.dispose();
     }
 }
