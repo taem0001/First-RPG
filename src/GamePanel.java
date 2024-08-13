@@ -2,17 +2,22 @@ import java.awt.*;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    // screen size variables
+    // screen variables
     private final int SCREENWIDTH = 640;
     private final int SCREENHEIGHT = 480;
+    private final int TILESIZE = 16;
 
     // game running variables
     private boolean running = false;
     private int FPS = 60;
 
+    // important objects
+    Player player;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
         this.setDoubleBuffered(true);
+        this.setFocusable(true);
     }
 
     public synchronized void start() {
@@ -53,5 +58,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        // draw player
+        g.setColor(Color.BLACK);
+        g.fillRect(200, 200, TILESIZE, TILESIZE);
+        g.dispose();
     }
 }
