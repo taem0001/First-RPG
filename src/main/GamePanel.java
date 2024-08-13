@@ -1,5 +1,8 @@
+package main;
+
 import java.awt.*;
 import javax.swing.*;
+import entity.Player;
 
 public class GamePanel extends JPanel implements Runnable {
     private final int SCREENWIDTH = 640;

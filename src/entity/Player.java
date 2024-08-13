@@ -1,5 +1,9 @@
+package entity;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import main.GamePanel;
+import main.KeyHandler;
 
 public class Player extends Entity {
     private GamePanel gamePanel;
@@ -27,23 +31,20 @@ public class Player extends Entity {
         if (keyH.getUp()) {
             setDir("up");
             changeY(-getSpeed());
-        }
-        if (keyH.getDown()) {
+        } else if (keyH.getDown()) {
             setDir("down");
             changeY(getSpeed());
-        }
-        if (keyH.getLeft()) {
+        } else if (keyH.getLeft()) {
             setDir("left");
             changeX(-getSpeed());
-        }
-        if (keyH.getRight()) {
+        } else if (keyH.getRight()) {
             setDir("right");
             changeX(getSpeed());
         }
 
         incrementSpriteCounter();
 
-        if (getSpriteCounter() > 10) {
+        if (getSpriteCounter() > 12) {
             if (getSpriteNum() < 4) {
                 incrementSpriteNum();
             } else {
