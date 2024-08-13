@@ -1,6 +1,6 @@
 package helper;
 
-public class Helper {
+public class ScreenInfo {
     private final int SCREENWIDTH = 640;
     private final int SCREENHEIGHT = 480;
     private final int TILESIZE = 32;
