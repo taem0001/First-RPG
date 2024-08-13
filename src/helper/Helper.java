@@ -5,6 +5,8 @@ public class Helper {
     private final int SCREENHEIGHT = 480;
     private final int TILESIZE = 32;
     private final int CHUNKSIZE = 16;
+    private final int MAXCOL = SCREENWIDTH / TILESIZE;
+    private final int MAXROW = SCREENHEIGHT / TILESIZE;
 
     public int getSCREENWIDTH() {
         return SCREENWIDTH;
@@ -20,5 +22,13 @@ public class Helper {
 
     public int getCHUNKSIZE() {
         return CHUNKSIZE;
+    }
+
+    public int getMAXCOL() {
+        return MAXCOL;
+    }
+
+    public int getMAXROW() {
+        return MAXROW;
     }
 }

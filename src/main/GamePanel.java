@@ -8,7 +8,7 @@ import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     private boolean running = false;
-    private int FPS = 60;
+    private final int FPS = 60;
 
     private Helper helper = new Helper();
     private KeyHandler keyH = new KeyHandler();

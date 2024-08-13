@@ -16,8 +16,7 @@ public class TileManager {
 
     public TileManager() {
         tiles = new Tile[2];
-        tileMap = new int[helper.getSCREENWIDTH() / helper.getTILESIZE()][helper.getSCREENHEIGHT()
-                / helper.getTILESIZE()];
+        tileMap = new int[helper.getMAXROW()][helper.getMAXCOL()];
 
         loadTiles();
         loadTileMap();
@@ -44,17 +43,17 @@ public class TileManager {
         try {
             Scanner mapLoader = new Scanner(new File("../res/levels/Map1.txt"));
             int i = 0;
-
+            
             while (mapLoader.hasNextLine() && i < tileMap.length) {
                 String line = mapLoader.nextLine();
 
-                for (int k = 0; k < tileMap[i].length; k++) {
-                    int num = Character.getNumericValue(line.charAt(k));
-                    tileMap[i][k] = num;
+                for (int j = 0; j < line.length(); j++) {
+                    int num = Character.getNumericValue(line.charAt(j));
+                    tileMap[i][j] = num;
                 }
-
                 i++;
             }
+
             mapLoader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -62,13 +61,13 @@ public class TileManager {
     }
 
     public void draw(Graphics g) {
-        int n = helper.getSCREENWIDTH() / helper.getTILESIZE();
-        int m = helper.getSCREENHEIGHT() / helper.getTILESIZE();
+        int m = helper.getMAXROW();
+        int n = helper.getMAXCOL();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 int tileNum = tileMap[i][j];
-                g.drawImage(tiles[tileNum].getImage(), i * helper.getTILESIZE(), j * helper.getTILESIZE(),
+                g.drawImage(tiles[tileNum].getImage(), j * helper.getTILESIZE(), i * helper.getTILESIZE(),
                         helper.getTILESIZE(), helper.getTILESIZE(), null);
             }
         }
