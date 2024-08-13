@@ -7,6 +7,6 @@ public class GamePanel extends JPanel {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
-        this.setBackground(Color.BLUE);
+        this.setDoubleBuffered(true);
     }
 }
