@@ -71,7 +71,8 @@ public abstract class Entity {
 
             for (int i = 0; i < width / helper.getCHUNKSIZE(); i++) {
                 for (int j = 0; j < height / helper.getCHUNKSIZE(); j++) {
-                    BufferedImage tempImage = spriteSheet.getSubimage(j * helper.getCHUNKSIZE(), i * helper.getCHUNKSIZE(), helper.getCHUNKSIZE(), helper.getCHUNKSIZE());
+                    BufferedImage tempImage = spriteSheet.getSubimage(j * helper.getCHUNKSIZE(),
+                            i * helper.getCHUNKSIZE(), helper.getCHUNKSIZE(), helper.getCHUNKSIZE());
                     sprites[k] = tempImage;
                     k++;
                 }
