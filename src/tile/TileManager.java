@@ -45,7 +45,7 @@ public class TileManager {
             Scanner mapLoader = new Scanner(new File("../res/levels/Map1.txt"));
             int i = 0;
 
-            while (mapLoader.hasNextLine() && i < tileMap.length) { 
+            while (mapLoader.hasNextLine() && i < tileMap.length) {
                 String line = mapLoader.nextLine();
 
                 for (int k = 0; k < tileMap[i].length; k++) {
@@ -59,7 +59,6 @@ public class TileManager {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public void draw(Graphics g) {
