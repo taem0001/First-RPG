@@ -1,6 +1,10 @@
+import java.awt.image.*;
+
 public abstract class Entity {
     private int x, y;
     private int speed;
+
+    private BufferedImage[] sprites;
 
     public void changeX(int n) {
         x += n;
