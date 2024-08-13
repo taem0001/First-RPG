@@ -1,18 +1,17 @@
 package tile;
 
-import main.GamePanel;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import helper.Helper;
 import java.awt.*;
 
 public class TileManager {
-    private GamePanel gamePanel;
     private Tile[] tiles;
+    private Helper helper = new Helper();
 
-    public TileManager(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public TileManager() {
         tiles = new Tile[2];
 
         loadTiles();
@@ -24,8 +23,8 @@ public class TileManager {
 
             final int width = tileSheet.getWidth();
 
-            for (int i = 0; i < width / 16; i++) {
-                BufferedImage tempImage = tileSheet.getSubimage(i * 16, 0, 16, 16);
+            for (int i = 0; i < width / helper.getCHUNKSIZE(); i++) {
+                BufferedImage tempImage = tileSheet.getSubimage(i * helper.getCHUNKSIZE(), 0, helper.getCHUNKSIZE(), helper.getCHUNKSIZE());
                 tiles[i] = new Tile();
                 tiles[i].setImage(tempImage);
             } 
@@ -35,6 +34,6 @@ public class TileManager {
     }
 
     public void draw(Graphics g) {
-        g.drawImage(tiles[0].getImage(), 0, 0, gamePanel.getTILESIZE(), gamePanel.getTILESIZE(),null);
+        g.drawImage(tiles[0].getImage(), 0, 0, helper.getTILESIZE(), helper.getTILESIZE(),null);
     }
 }

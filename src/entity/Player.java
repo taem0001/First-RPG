@@ -2,17 +2,16 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import main.GamePanel;
+import helper.Helper;
 import main.KeyHandler;
 
 public class Player extends Entity {
-    private GamePanel gamePanel;
     private KeyHandler keyH;
+    private Helper helper = new Helper();
 
     private BufferedImage[] sprites;
 
-    public Player(GamePanel gamePanel, KeyHandler keyH) {
-        this.gamePanel = gamePanel;
+    public Player(KeyHandler keyH) {
         this.keyH = keyH;
 
         setDefaulValues();
@@ -21,8 +20,8 @@ public class Player extends Entity {
     }
 
     private void setDefaulValues() {
-        setX(gamePanel.getSCREENWIDTH() / 2);
-        setY(gamePanel.getSCREENHEIGHT() / 2);
+        setX(helper.getSCREENWIDTH() / 2);
+        setY(helper.getSCREENHEIGHT() / 2);
         setSpeed(5);
         setDir("down");
     }
@@ -115,6 +114,6 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g.drawImage(image, getX(), getY(), gamePanel.getTILESIZE(), gamePanel.getTILESIZE(), null);
+        g.drawImage(image, getX(), getY(), helper.getTILESIZE(), helper.getTILESIZE(), null);
     }
 }

@@ -3,22 +3,20 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 import entity.Player;
+import helper.Helper;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
-    private final int SCREENWIDTH = 640;
-    private final int SCREENHEIGHT = 480;
-    private final int TILESIZE = 48;
-
     private boolean running = false;
     private int FPS = 60;
 
-    KeyHandler keyH = new KeyHandler();
-    Player player = new Player(this, keyH);
-    TileManager tileManager = new TileManager(this);
+    private Helper helper = new Helper();
+    private KeyHandler keyH = new KeyHandler();
+    private Player player = new Player(keyH);
+    private TileManager tileManager = new TileManager();
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
+        this.setPreferredSize(new Dimension(helper.getSCREENWIDTH(), helper.getSCREENHEIGHT()));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -67,17 +65,5 @@ public class GamePanel extends JPanel implements Runnable {
         player.draw(g);
 
         g.dispose();
-    }
-
-    public int getSCREENWIDTH() {
-        return SCREENWIDTH;
-    }
-
-    public int getSCREENHEIGHT() {
-        return SCREENHEIGHT;
-    }
-
-    public int getTILESIZE() {
-        return TILESIZE;
     }
 }

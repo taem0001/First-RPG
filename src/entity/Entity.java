@@ -4,6 +4,7 @@ import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import helper.Helper;
 
 public abstract class Entity {
     private int x, y;
@@ -14,6 +15,8 @@ public abstract class Entity {
 
     private int spriteCounter = 0;
     private int spriteNum = 1;
+
+    private Helper helper = new Helper();
 
     public void changeX(int n) {
         x += n;
@@ -61,14 +64,14 @@ public abstract class Entity {
 
             final int width = spriteSheet.getWidth();
             final int height = spriteSheet.getHeight();
-            int n = (width / 16) * (height / 16);
+            int n = (width / helper.getCHUNKSIZE()) * (height / helper.getCHUNKSIZE());
 
             sprites = new BufferedImage[n];
             int k = 0;
 
-            for (int i = 0; i < width / 16; i++) {
-                for (int j = 0; j < height / 16; j++) {
-                    BufferedImage tempImage = spriteSheet.getSubimage(j * 16, i * 16, 16, 16);
+            for (int i = 0; i < width / helper.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < height / helper.getCHUNKSIZE(); j++) {
+                    BufferedImage tempImage = spriteSheet.getSubimage(j * helper.getCHUNKSIZE(), i * helper.getCHUNKSIZE(), helper.getCHUNKSIZE(), helper.getCHUNKSIZE());
                     sprites[k] = tempImage;
                     k++;
                 }
