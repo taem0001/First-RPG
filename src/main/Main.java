@@ -1,15 +1,15 @@
 package main;
 
 import javax.swing.*;
-import helper.Helper;
+import helper.ScreenInfo;
 
 public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game");
         GamePanel gamePanel = new GamePanel();
-        Helper helper = new Helper();
+        ScreenInfo screenInfo = new ScreenInfo();
 
-        frame.setSize(helper.getSCREENWIDTH(), helper.getSCREENHEIGHT());
+        frame.setSize(screenInfo.getSCREENWIDTH(), screenInfo.getSCREENHEIGHT());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);

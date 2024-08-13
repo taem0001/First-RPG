@@ -2,12 +2,12 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import helper.Helper;
+import helper.ScreenInfo;
 import main.KeyHandler;
 
 public class Player extends Entity {
     private KeyHandler keyH;
-    private Helper helper = new Helper();
+    private ScreenInfo screenInfo = new ScreenInfo();
 
     private BufferedImage[] sprites;
     private final int SCREENX;
@@ -16,8 +16,8 @@ public class Player extends Entity {
     public Player(KeyHandler keyH) {
         this.keyH = keyH;
 
-        SCREENX = helper.getSCREENWIDTH() / 2;
-        SCREENY = helper.getSCREENHEIGHT() / 2;
+        SCREENX = screenInfo.getSCREENWIDTH() / 2;
+        SCREENY = screenInfo.getSCREENHEIGHT() / 2;
 
         setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
@@ -25,8 +25,8 @@ public class Player extends Entity {
     }
 
     private void setDefaulValues() {
-        setWorldX(30 * helper.getTILESIZE());
-        setWorldY(30 * helper.getTILESIZE());
+        setWorldX(30 * screenInfo.getTILESIZE());
+        setWorldY(30 * screenInfo.getTILESIZE());
         setSpeed(3);
         setDir("down");
     }
@@ -119,8 +119,8 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g.drawImage(image, SCREENX - helper.getTILESIZE(), SCREENY - helper.getTILESIZE(), helper.getTILESIZE(),
-                helper.getTILESIZE(), null);
+        g.drawImage(image, SCREENX - screenInfo.getTILESIZE(), SCREENY - screenInfo.getTILESIZE(), screenInfo.getTILESIZE(),
+                screenInfo.getTILESIZE(), null);
     }
 
     public int getSCREENX() {

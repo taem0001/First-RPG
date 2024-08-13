@@ -17,4 +17,8 @@ public class Tile {
     public void setImage(BufferedImage image) {
         this.image = image;
     }
+
+    public void setCollision(boolean b) {
+        collision = b;
+    }
 }

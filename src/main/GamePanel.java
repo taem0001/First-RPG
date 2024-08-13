@@ -3,20 +3,20 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 import entity.Player;
-import helper.Helper;
+import helper.ScreenInfo;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     private boolean running = false;
     private final int FPS = 60;
 
-    private Helper helper = new Helper();
+    private ScreenInfo screenInfo = new ScreenInfo();
     private KeyHandler keyH = new KeyHandler();
     private Player player = new Player(keyH);
     private TileManager tileManager = new TileManager(this);
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(helper.getSCREENWIDTH(), helper.getSCREENHEIGHT()));
+        this.setPreferredSize(new Dimension(screenInfo.getSCREENWIDTH(), screenInfo.getSCREENHEIGHT()));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);

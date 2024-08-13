@@ -4,7 +4,7 @@ import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import helper.Helper;
+import helper.ScreenInfo;
 
 public abstract class Entity {
     private int worldX, worldY;
@@ -16,7 +16,7 @@ public abstract class Entity {
     private int spriteCounter = 0;
     private int spriteNum = 1;
 
-    private Helper helper = new Helper();
+    private ScreenInfo screenInfo = new ScreenInfo();
 
     public void changeWorldX(int n) {
         worldX += n;
@@ -64,15 +64,15 @@ public abstract class Entity {
 
             final int width = spriteSheet.getWidth();
             final int height = spriteSheet.getHeight();
-            int n = (width / helper.getCHUNKSIZE()) * (height / helper.getCHUNKSIZE());
+            int n = (width / screenInfo.getCHUNKSIZE()) * (height / screenInfo.getCHUNKSIZE());
 
             sprites = new BufferedImage[n];
             int k = 0;
 
-            for (int i = 0; i < width / helper.getCHUNKSIZE(); i++) {
-                for (int j = 0; j < height / helper.getCHUNKSIZE(); j++) {
-                    BufferedImage tempImage = spriteSheet.getSubimage(j * helper.getCHUNKSIZE(),
-                            i * helper.getCHUNKSIZE(), helper.getCHUNKSIZE(), helper.getCHUNKSIZE());
+            for (int i = 0; i < width / screenInfo.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < height / screenInfo.getCHUNKSIZE(); j++) {
+                    BufferedImage tempImage = spriteSheet.getSubimage(j * screenInfo.getCHUNKSIZE(),
+                            i * screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE());
                     sprites[k] = tempImage;
                     k++;
                 }
