@@ -3,6 +3,7 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 import entity.Player;
+import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     private final int SCREENWIDTH = 640;
@@ -14,6 +15,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH = new KeyHandler();
     Player player = new Player(this, keyH);
+    TileManager tileManager = new TileManager(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(SCREENWIDTH, SCREENHEIGHT));
@@ -61,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        tileManager.draw(g);
         player.draw(g);
 
         g.dispose();
