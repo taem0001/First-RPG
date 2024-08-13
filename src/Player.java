@@ -43,10 +43,6 @@ public class Player extends Entity {
     }
 
     public void draw(Graphics g) {
-        // g.setColor(Color.BLACK);
-        // g.fillRect(getX() - gamePanel.getTILESIZE(), getY() -
-        // gamePanel.getTILESIZE(), gamePanel.getTILESIZE(), gamePanel.getTILESIZE());
-
         BufferedImage image = null;
 
         switch (getDir()) {
