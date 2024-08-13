@@ -22,7 +22,7 @@ public class Player extends Entity {
     private void setDefaulValues() {
         setX(helper.getSCREENWIDTH() / 2);
         setY(helper.getSCREENHEIGHT() / 2);
-        setSpeed(5);
+        setSpeed(3);
         setDir("down");
     }
 
