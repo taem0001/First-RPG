@@ -2,16 +2,13 @@ import java.awt.*;
 import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    // screen variables
     private final int SCREENWIDTH = 640;
     private final int SCREENHEIGHT = 480;
     private final int TILESIZE = 16;
 
-    // game running variables
     private boolean running = false;
     private int FPS = 60;
 
-    // important objects
     KeyHandler keyH = new KeyHandler();
     Player player = new Player(this, keyH);
 
