@@ -62,30 +62,6 @@ public abstract class Entity {
         dir = s;
     }
 
-    public void loadSprites(String url) {
-        try {
-            BufferedImage spriteSheet = ImageIO.read(new File(url));
-
-            final int width = spriteSheet.getWidth();
-            final int height = spriteSheet.getHeight();
-            int n = (width / screenInfo.getCHUNKSIZE()) * (height / screenInfo.getCHUNKSIZE());
-
-            sprites = new BufferedImage[n];
-            int k = 0;
-
-            for (int i = 0; i < width / screenInfo.getCHUNKSIZE(); i++) {
-                for (int j = 0; j < height / screenInfo.getCHUNKSIZE(); j++) {
-                    BufferedImage tempImage = spriteSheet.getSubimage(j * screenInfo.getCHUNKSIZE(),
-                            i * screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE());
-                    sprites[k] = tempImage;
-                    k++;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public BufferedImage[] getSprites() {
         return sprites;
     }
@@ -128,5 +104,29 @@ public abstract class Entity {
 
     public boolean getCollisionOn() {
         return collisionOn;
+    }
+
+    public void loadSprites(String url) {
+        try {
+            BufferedImage spriteSheet = ImageIO.read(new File(url));
+
+            final int width = spriteSheet.getWidth();
+            final int height = spriteSheet.getHeight();
+            int n = (width / screenInfo.getCHUNKSIZE()) * (height / screenInfo.getCHUNKSIZE());
+
+            sprites = new BufferedImage[n];
+            int k = 0;
+
+            for (int i = 0; i < width / screenInfo.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < height / screenInfo.getCHUNKSIZE(); j++) {
+                    BufferedImage tempImage = spriteSheet.getSubimage(j * screenInfo.getCHUNKSIZE(),
+                            i * screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE());
+                    sprites[k] = tempImage;
+                    k++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
