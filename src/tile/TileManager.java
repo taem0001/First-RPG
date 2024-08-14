@@ -20,11 +20,11 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
-        tiles = new Tile[3];
+        tiles = new Tile[5];
         tileMap = new int[screenInfo.getMAXWORLDCOL()][screenInfo.getMAXWORLDROW()];
 
         loadTiles();
-        loadTileMap("../res/levels/Map2.csv");
+        loadTileMap("../res/levels/Map3.csv");
     }
 
     private void loadTiles() {
@@ -42,6 +42,8 @@ public class TileManager {
             }
 
             tiles[1].setCollision(true);
+            tiles[3].setCollision(true);
+            tiles[4].setCollision(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
