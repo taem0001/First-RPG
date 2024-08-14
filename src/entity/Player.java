@@ -16,8 +16,8 @@ public class Player extends Entity {
     public Player(KeyHandler keyH) {
         this.keyH = keyH;
 
-        SCREENX = screenInfo.getSCREENWIDTH() / 2;
-        SCREENY = screenInfo.getSCREENHEIGHT() / 2;
+        SCREENX = screenInfo.getSCREENWIDTH() / 2 - screenInfo.getTILESIZE();
+        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - screenInfo.getTILESIZE();
 
         setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
@@ -119,7 +119,7 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g.drawImage(image, SCREENX - screenInfo.getTILESIZE(), SCREENY - screenInfo.getTILESIZE(), screenInfo.getTILESIZE(),
+        g.drawImage(image, SCREENX, SCREENY, screenInfo.getTILESIZE(),
                 screenInfo.getTILESIZE(), null);
     }
 
