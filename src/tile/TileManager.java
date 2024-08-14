@@ -92,7 +92,6 @@ public class TileManager {
                     g.drawImage(tiles[tileNum].getImage(), screenX, screenY,
                             screenInfo.getTILESIZE(), screenInfo.getTILESIZE(), null);
                 }
-
             }
         }
     }

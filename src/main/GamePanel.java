@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import javax.swing.*;
+import entity.CollisionChecker;
 import entity.Player;
 import helper.ScreenInfo;
 import tile.TileManager;
@@ -13,7 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     private ScreenInfo screenInfo = new ScreenInfo();
     private KeyHandler keyH = new KeyHandler();
     private TileManager tileManager = new TileManager(this);
-    private Player player = new Player(keyH);
+    private CollisionChecker collisionChecker = new CollisionChecker(this);
+    private Player player = new Player(this, keyH);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenInfo.getSCREENWIDTH(), screenInfo.getSCREENHEIGHT()));
@@ -69,5 +71,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public TileManager getTileManager() {
+        return tileManager;
+    }
+
+    public CollisionChecker getCollisionChecker() {
+        return collisionChecker;
     }
 }

@@ -3,9 +3,11 @@ package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import helper.ScreenInfo;
+import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
+    private GamePanel gamePanel;
     private KeyHandler keyH;
     private ScreenInfo screenInfo = new ScreenInfo();
 
@@ -13,11 +15,14 @@ public class Player extends Entity {
     private final int SCREENX;
     private final int SCREENY;
 
-    public Player(KeyHandler keyH) {
+    public Player(GamePanel gamePanel, KeyHandler keyH) {
+        this.gamePanel = gamePanel;
         this.keyH = keyH;
 
-        SCREENX = screenInfo.getSCREENWIDTH() / 2 - screenInfo.getTILESIZE();
-        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - screenInfo.getTILESIZE();
+        SCREENX = screenInfo.getSCREENWIDTH() / 2 - (screenInfo.getTILESIZE() / 2) ;
+        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - (screenInfo.getTILESIZE() / 2) ;
+
+        setHitBox(new Rectangle(8, 14, 16, 18));
 
         setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
@@ -32,18 +37,39 @@ public class Player extends Entity {
     }
 
     public void update() {
+        String direction = null;
+
         if (keyH.getUp()) {
-            setDir("up");
-            changeWorldY(-getSpeed());
+            direction = "up";
         } else if (keyH.getDown()) {
-            setDir("down");
-            changeWorldY(getSpeed());
+            direction = "down";
         } else if (keyH.getLeft()) {
-            setDir("left");
-            changeWorldX(-getSpeed());
+            direction = "left";
         } else if (keyH.getRight()) {
-            setDir("right");
-            changeWorldX(getSpeed());
+            direction = "right";
+        }
+
+        if (direction != null) {
+            setDir(direction);
+            setCollisionOn(false);
+            gamePanel.getCollisionChecker().checkTile(this);
+
+            if (!getCollisionOn()) {
+                switch (direction) {
+                    case "up":
+                        changeWorldY(-getSpeed());
+                        break;
+                    case "down":
+                        changeWorldY(getSpeed());
+                        break;
+                    case "left":
+                        changeWorldX(-getSpeed());
+                        break;
+                    case "right":
+                        changeWorldX(getSpeed());
+                        break;
+                }
+            }
         }
 
         incrementSpriteCounter();

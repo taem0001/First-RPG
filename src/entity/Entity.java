@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Rectangle;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,9 @@ public abstract class Entity {
     private int spriteNum = 1;
 
     private ScreenInfo screenInfo = new ScreenInfo();
+
+    private Rectangle hitBox;
+    private boolean collisionOn = false;
 
     public void changeWorldX(int n) {
         worldX += n;
@@ -108,5 +112,21 @@ public abstract class Entity {
 
     public void resetSpriteNum() {
         spriteNum = 1;
+    }
+
+    public void setHitBox(Rectangle box) {
+        hitBox = box;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
+    public void setCollisionOn(boolean b) {
+        collisionOn = b;
+    }
+
+    public boolean getCollisionOn() {
+        return collisionOn;
     }
 }
