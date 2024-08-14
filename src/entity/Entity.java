@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 import helper.ScreenInfo;
 
 public abstract class Entity {
-    private int worldX, worldY;
-    private int speed;
+    public int worldX, worldY;
+    public int speed;
 
     private BufferedImage[] sprites;
     private String dir;

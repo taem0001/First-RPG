@@ -5,6 +5,7 @@ import javax.swing.*;
 import entity.CollisionChecker;
 import entity.Player;
 import helper.ScreenInfo;
+import object.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -15,7 +16,9 @@ public class GamePanel extends JPanel implements Runnable {
     private KeyHandler keyH = new KeyHandler();
     private TileManager tileManager = new TileManager(this);
     private CollisionChecker collisionChecker = new CollisionChecker(this);
+    private AssetManager assetManager = new AssetManager(this);
     private Player player = new Player(this, keyH);
+    private SuperObject[] objects = new SuperObject[10];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenInfo.getSCREENWIDTH(), screenInfo.getSCREENHEIGHT()));
