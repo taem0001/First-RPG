@@ -19,8 +19,8 @@ public class Player extends Entity {
         this.gamePanel = gamePanel;
         this.keyH = keyH;
 
-        SCREENX = screenInfo.getSCREENWIDTH() / 2 - (screenInfo.getTILESIZE() / 2) ;
-        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - (screenInfo.getTILESIZE() / 2) ;
+        SCREENX = screenInfo.getSCREENWIDTH() / 2 - (screenInfo.getTILESIZE() / 2);
+        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - (screenInfo.getTILESIZE() / 2);
 
         setHitBox(new Rectangle(8, 14, 16, 18));
 
