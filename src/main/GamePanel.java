@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void gameSetUp() {
-        assetManager.setObject();
+        assetManager.setObjects();
     }
 
     public synchronized void start() {

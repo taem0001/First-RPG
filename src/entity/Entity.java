@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 import helper.ScreenInfo;
 
 public abstract class Entity {
-    public int worldX, worldY;
-    public int speed;
+    private int worldX, worldY;
+    private int speed;
 
     private BufferedImage[] sprites;
     private String dir;
@@ -20,6 +20,7 @@ public abstract class Entity {
     private ScreenInfo screenInfo = new ScreenInfo();
 
     private Rectangle hitBox;
+    private int hitBoxDefaultX, hitBoxDefaultY;
     private boolean collisionOn = false;
 
     public void changeWorldX(int n) {
@@ -104,6 +105,22 @@ public abstract class Entity {
 
     public boolean getCollisionOn() {
         return collisionOn;
+    }
+
+    public int getHitBoxDefaultX() {
+        return hitBoxDefaultX;
+    }
+
+    public int getHitBoxDefaultY() {
+        return hitBoxDefaultY;
+    }
+
+    public void setHitBoxDefaultX(int hitBoxDefaultX) {
+        this.hitBoxDefaultX = hitBoxDefaultX;
+    }
+
+    public void setHitBoxDefaultY(int hitBoxDefaultY) {
+        this.hitBoxDefaultY = hitBoxDefaultY;
     }
 
     public void loadSprites(String url) {

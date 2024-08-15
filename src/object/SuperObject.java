@@ -1,6 +1,7 @@
 package object;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import helper.ScreenInfo;
 import main.GamePanel;
@@ -11,6 +12,9 @@ public class SuperObject {
     private String name;
     private boolean collision = false;
     private int worldX, worldY;
+    private Rectangle hitBox = new Rectangle(0, 0, screenInfo.getTILESIZE(), screenInfo.getTILESIZE());
+    private int hitBoxDefaultX = 0;
+    private int hitBoxDefaultY = 0;
 
     public void draw(Graphics g, GamePanel gamePanel) {
         int screenX = worldX - gamePanel.getPlayer().getWorldX() + gamePanel.getPlayer().getSCREENX();
@@ -67,5 +71,17 @@ public class SuperObject {
 
     public void setCollision(boolean collision) {
         this.collision = collision;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
+    public int getHitBoxDefaultX() {
+        return hitBoxDefaultX;
+    }
+
+    public int getHitBoxDefaultY() {
+        return hitBoxDefaultY;
     }
 }

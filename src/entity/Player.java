@@ -15,6 +15,8 @@ public class Player extends Entity {
     private final int SCREENX;
     private final int SCREENY;
 
+    private int keyNum = 0;
+
     public Player(GamePanel gamePanel, KeyHandler keyH) {
         this.gamePanel = gamePanel;
         this.keyH = keyH;
@@ -23,6 +25,8 @@ public class Player extends Entity {
         SCREENY = screenInfo.getSCREENHEIGHT() / 2 - (screenInfo.getTILESIZE() / 2);
 
         setHitBox(new Rectangle(8, 14, 16, 18));
+        setHitBoxDefaultX(getHitBox().x);
+        setHitBoxDefaultY(getHitBox().y);
 
         setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
@@ -53,6 +57,9 @@ public class Player extends Entity {
             setDir(direction);
             setCollisionOn(false);
             gamePanel.getCollisionChecker().checkTile(this);
+
+            int objectIndex = gamePanel.getCollisionChecker().checkObject(this, true);
+            pickUpObject(objectIndex);
 
             if (!getCollisionOn()) {
                 switch (direction) {
@@ -147,6 +154,27 @@ public class Player extends Entity {
         }
         g.drawImage(image, SCREENX, SCREENY, screenInfo.getTILESIZE(),
                 screenInfo.getTILESIZE(), null);
+    }
+
+    private void pickUpObject(int index) {
+        if (index != 999) {
+            String objName = gamePanel.getObjects()[index].getName();
+
+            switch (objName) {
+                case "Key":
+                    keyNum++;
+                    gamePanel.getObjects()[index] = null;
+                    break;
+                case "Door":
+                    if (keyNum > 0) {
+                        gamePanel.getObjects()[index] = null;
+                        keyNum--;
+                    }
+                    break;
+                case "Chest":
+                    break;
+            }
+        }
     }
 
     public int getSCREENX() {

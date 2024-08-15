@@ -1,9 +1,9 @@
 package entity;
 
 import java.awt.Rectangle;
-
 import helper.ScreenInfo;
 import main.GamePanel;
+import object.SuperObject;
 
 public class CollisionChecker {
     private GamePanel gamePanel;
@@ -69,5 +69,49 @@ public class CollisionChecker {
                 }
                 break;
         }
+    }
+
+    public int checkObject(Entity entity, boolean isPlayer) {
+        int index = 999;
+        int tempIndex = 0;
+
+        for (SuperObject object : gamePanel.getObjects()) {
+            if (object != null) {
+                entity.getHitBox().x += entity.getWorldX();
+                entity.getHitBox().y += entity.getWorldY();
+
+                object.getHitBox().x += object.getWorldX();
+                object.getHitBox().y += object.getWorldY();
+
+                int dx = 0, dy = 0;
+                switch (entity.getDir()) {
+                    case "up" -> dy = -entity.getSpeed();
+                    case "down" -> dy = entity.getSpeed();
+                    case "left" -> dx = -entity.getSpeed();
+                    case "right" -> dx = entity.getSpeed();
+                }
+
+                entity.getHitBox().x += dx;
+                entity.getHitBox().y += dy;
+
+                if (entity.getHitBox().intersects(object.getHitBox())) {
+                    if (object.getCollision()) {
+                        entity.setCollisionOn(true);
+                    }
+                    if (isPlayer) {
+                        index = tempIndex;
+                    }
+                }
+
+                entity.getHitBox().x = entity.getHitBoxDefaultX();
+                entity.getHitBox().y = entity.getHitBoxDefaultY();
+
+                object.getHitBox().x = object.getHitBoxDefaultX();
+                object.getHitBox().y = object.getHitBoxDefaultY();
+            }
+            tempIndex++;
+        }
+
+        return index;
     }
 }

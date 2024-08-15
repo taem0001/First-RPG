@@ -11,6 +11,7 @@ public class ObjectDoor extends SuperObject {
 
     public ObjectDoor() {
         setName("Door");
+        setCollision(true);
 
         try {
             BufferedImage tempImage = ImageIO.read(new File("../res/sprites/ObjectSheet.png"));

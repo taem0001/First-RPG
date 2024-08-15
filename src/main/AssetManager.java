@@ -1,7 +1,10 @@
 package main;
 
 import helper.ScreenInfo;
+import object.ObjectChest;
+import object.ObjectDoor;
 import object.ObjectKey;
+import object.SuperObject;
 
 public class AssetManager {
     private GamePanel gamePanel;
@@ -11,13 +14,17 @@ public class AssetManager {
         this.gamePanel = gamePanel;
     }
 
-    public void setObject() {
-        gamePanel.getObjects()[0] = new ObjectKey();
-        gamePanel.getObjects()[0].setWorldX(46 * screenInfo.getTILESIZE());
-        gamePanel.getObjects()[0].setWorldY(32 * screenInfo.getTILESIZE());
+    public void setObjects() {
+        insertObject(new ObjectKey(), 0, 46, 32);
+        insertObject(new ObjectKey(), 1, 24, 32);
+        insertObject(new ObjectKey(), 2, 8, 29);
+        insertObject(new ObjectChest(), 3, 39, 17);
+        insertObject(new ObjectDoor(), 4, 35, 19);
+    }
 
-        gamePanel.getObjects()[1] = new ObjectKey();
-        gamePanel.getObjects()[1].setWorldX(24 * screenInfo.getTILESIZE());
-        gamePanel.getObjects()[1].setWorldY(32 * screenInfo.getTILESIZE());
+    private void insertObject(SuperObject object, int index, int col, int row) {
+        gamePanel.getObjects()[index] = object;
+        gamePanel.getObjects()[index].setWorldX(col * screenInfo.getTILESIZE());
+        gamePanel.getObjects()[index].setWorldY(row * screenInfo.getTILESIZE());
     }
 }
