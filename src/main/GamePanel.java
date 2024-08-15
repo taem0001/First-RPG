@@ -14,7 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     private ScreenInfo screenInfo = new ScreenInfo();
     private KeyHandler keyH = new KeyHandler();
-    private Sound sound = new Sound();
+    private Sound music = new Sound();
+    private Sound se = new Sound();
     private TileManager tileManager = new TileManager(this);
     private CollisionChecker collisionChecker = new CollisionChecker(this);
     private AssetManager assetManager = new AssetManager(this);
@@ -87,18 +88,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
 
     public void playSe(int i) {
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 
     public Player getPlayer() {
