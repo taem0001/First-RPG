@@ -27,6 +27,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    public void gameSetUp() {
+        assetManager.setObject();
+    }
+
     public synchronized void start() {
         new Thread(this).start();
         running = true;
@@ -67,6 +71,13 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         tileManager.draw(g);
+
+        for (SuperObject object : objects) {
+            if (object != null) {
+                object.draw(g, this);
+            }
+        }
+
         player.draw(g);
 
         g.dispose();
@@ -82,5 +93,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public CollisionChecker getCollisionChecker() {
         return collisionChecker;
+    }
+
+    public SuperObject[] getObjects() {
+        return objects;
     }
 }
