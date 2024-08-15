@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     private TileManager tileManager = new TileManager(this);
     private CollisionChecker collisionChecker = new CollisionChecker(this);
     private AssetManager assetManager = new AssetManager(this);
+    private UI ui = new UI(this);
 
     private Player player = new Player(this, keyH);
     private SuperObject[] objects = new SuperObject[10];
@@ -83,6 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         player.draw(g);
+        ui.draw(g);
 
         g.dispose();
     }

@@ -191,4 +191,8 @@ public class Player extends Entity {
     public int getSCREENY() {
         return SCREENY;
     }
+
+    public int getKeyNum() {
+        return keyNum;
+    }
 }
