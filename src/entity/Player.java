@@ -178,6 +178,9 @@ public class Player extends Entity {
                     }
                     break;
                 case "Chest":
+                    gamePanel.stop();
+                    gamePanel.stopMusic();
+                    gamePanel.playSe(9);
                     break;
                 case "Boots":
                     gamePanel.playSe(16);

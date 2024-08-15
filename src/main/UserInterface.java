@@ -30,22 +30,23 @@ public class UserInterface {
     }
 
     public void draw(Graphics g) {
-        g.setFont(font);
-        g.setColor(Color.WHITE);
-        g.setFont(g.getFont().deriveFont(Font.BOLD, 35f));
-        g.drawImage(keyImage, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE(),
-                screenInfo.getTILESIZE(), null);
-        g.drawString("x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
+        if (!gamePanel.getGameRunning()) {
+            drawText(g, Color.YELLOW, 35, "You beat the game!", screenInfo.getSCREENHEIGHT() / 2 + 1 * screenInfo.getTILESIZE());
+            drawText(g, Color.YELLOW, 70, "Congratulations!", screenInfo.getSCREENHEIGHT() / 2 - 1 * screenInfo.getTILESIZE());
+        } else {
+            drawImage(g, keyImage, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE(),
+                    screenInfo.getTILESIZE());
+            drawText(g, Color.WHITE, 35, "x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
 
-        if (messageOn) {
-            g.setFont(g.getFont().deriveFont(30f));
-            g.drawString(message, screenInfo.getTILESIZE() / 2, screenInfo.getSCREENHEIGHT() / 2);
+            if (messageOn) {
+                drawText(g, Color.WHITE, 30, message, screenInfo.getTILESIZE() / 2, screenInfo.getSCREENHEIGHT() / 2);
 
-            messageTick++;
+                messageTick++;
 
-            if (messageTick > 130) {
-                messageTick = 0;
-                messageOn = false;
+                if (messageTick > 130) {
+                    messageTick = 0;
+                    messageOn = false;
+                }
             }
         }
     }
@@ -53,5 +54,24 @@ public class UserInterface {
     public void showMessage(String text) {
         message = text;
         messageOn = true;
+    }
+
+    private void drawText(Graphics g, Color c, int fontSize, String text, int y) {
+        g.setColor(c);
+        g.setFont(font);
+        g.setFont(g.getFont().deriveFont(Font.BOLD, fontSize));
+        FontMetrics metrics = g.getFontMetrics(g.getFont());
+        g.drawString(text, ((int) screenInfo.getSCREENWIDTH() - metrics.stringWidth(text)) / 2, y);
+    }
+
+    private void drawText(Graphics g, Color c, int fontSize, String text, int x, int y) {
+        g.setColor(c);
+        g.setFont(font);
+        g.setFont(g.getFont().deriveFont(Font.BOLD, fontSize));
+        g.drawString(text, x, y);
+    }
+
+    private void drawImage(Graphics g, BufferedImage image, int x, int y, int width, int height) {
+        g.drawImage(image, x, y, width, height, null);
     }
 }

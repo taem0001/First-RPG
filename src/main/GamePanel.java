@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void gameSetUp() {
         assetManager.setObjects();
-        // playMusic(1);
+        playMusic(1);
     }
 
     public synchronized void start() {
@@ -123,5 +123,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public UserInterface getUserInterface() {
         return ui;
+    }
+
+    public boolean getGameRunning() {
+        return running;
     }
 }
