@@ -173,6 +173,10 @@ public class Player extends Entity {
                     break;
                 case "Chest":
                     break;
+                case "Boots":
+                    setSpeed(getSpeed() + 1);
+                    gamePanel.getObjects()[index] = null;
+                    break;
             }
         }
     }

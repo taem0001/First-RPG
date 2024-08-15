@@ -1,6 +1,7 @@
 package main;
 
 import helper.ScreenInfo;
+import object.ObjectBoots;
 import object.ObjectChest;
 import object.ObjectDoor;
 import object.ObjectKey;
@@ -20,6 +21,7 @@ public class AssetManager {
         insertObject(new ObjectKey(), 2, 8, 29);
         insertObject(new ObjectChest(), 3, 39, 17);
         insertObject(new ObjectDoor(), 4, 35, 19);
+        insertObject(new ObjectBoots(), 5, 27, 21);
     }
 
     private void insertObject(SuperObject object, int index, int col, int row) {
