@@ -11,6 +11,7 @@ public class ObjectChest extends SuperObject {
 
     public ObjectChest() {
         setName("Chest");
+        setCollision(true);
 
         try {
             BufferedImage tempImage = ImageIO.read(new File("../res/sprites/ObjectSheet.png"));

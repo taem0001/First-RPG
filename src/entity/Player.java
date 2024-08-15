@@ -165,12 +165,16 @@ public class Player extends Entity {
                     gamePanel.playSe(4);
                     keyNum++;
                     gamePanel.getObjects()[index] = null;
+                    gamePanel.getUserInterface().showMessage("Key obtained!");
                     break;
                 case "Door":
                     if (keyNum > 0) {
-                        gamePanel.playSe(7);
+                        gamePanel.playSe(21);
                         gamePanel.getObjects()[index] = null;
                         keyNum--;
+                        gamePanel.getUserInterface().showMessage("Door opened!");
+                    } else {
+                        gamePanel.getUserInterface().showMessage("Key needed!");
                     }
                     break;
                 case "Chest":
@@ -179,6 +183,7 @@ public class Player extends Entity {
                     gamePanel.playSe(16);
                     setSpeed(getSpeed() + 1);
                     gamePanel.getObjects()[index] = null;
+                    gamePanel.getUserInterface().showMessage("Speed up!");
                     break;
             }
         }

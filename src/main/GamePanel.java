@@ -2,6 +2,7 @@ package main;
 
 import java.awt.*;
 import javax.swing.*;
+
 import entity.CollisionChecker;
 import entity.Player;
 import helper.ScreenInfo;
@@ -19,7 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
     private TileManager tileManager = new TileManager(this);
     private CollisionChecker collisionChecker = new CollisionChecker(this);
     private AssetManager assetManager = new AssetManager(this);
-    private UI ui = new UI(this);
+    private UserInterface ui = new UserInterface(this);
 
     private Player player = new Player(this, keyH);
     private SuperObject[] objects = new SuperObject[10];
@@ -33,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void gameSetUp() {
         assetManager.setObjects();
-        playMusic(1);
+        // playMusic(1);
     }
 
     public synchronized void start() {
@@ -118,5 +119,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public SuperObject[] getObjects() {
         return objects;
+    }
+
+    public UserInterface getUserInterface() {
+        return ui;
     }
 }
