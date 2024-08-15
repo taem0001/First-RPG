@@ -162,11 +162,13 @@ public class Player extends Entity {
 
             switch (objName) {
                 case "Key":
+                    gamePanel.playSe(4);
                     keyNum++;
                     gamePanel.getObjects()[index] = null;
                     break;
                 case "Door":
                     if (keyNum > 0) {
+                        gamePanel.playSe(7);
                         gamePanel.getObjects()[index] = null;
                         keyNum--;
                     }
@@ -174,6 +176,7 @@ public class Player extends Entity {
                 case "Chest":
                     break;
                 case "Boots":
+                    gamePanel.playSe(16);
                     setSpeed(getSpeed() + 1);
                     gamePanel.getObjects()[index] = null;
                     break;
