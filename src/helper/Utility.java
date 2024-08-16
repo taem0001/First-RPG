@@ -10,8 +10,8 @@ public class Utility {
     private final int CHUNKSIZE = 16;
     private final int MAXSCREENCOL = SCREENWIDTH / TILESIZE;
     private final int MAXSCREENROW = SCREENHEIGHT / TILESIZE;
-    private final int MAXWORLDCOL = 60;
-    private final int MAXWORLDROW = 60;
+    private final int MAXWORLDCOL = 70;
+    private final int MAXWORLDROW = 70;
     private final int WORLDWIDTH = MAXSCREENCOL * TILESIZE;
     private final int WORLDHEIGHT = MAXSCREENROW * TILESIZE;
 
@@ -22,10 +22,6 @@ public class Utility {
         g.dispose();
 
         return result;
-    }
-
-    public void writeToFile(long l) {
-        
     }
 
     public int getSCREENWIDTH() {

@@ -20,11 +20,10 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
-        tiles = new Tile[5];
         tileMap = new int[utility.getMAXWORLDCOL()][utility.getMAXWORLDROW()];
 
         loadTiles();
-        loadTileMap("../res/levels/Map3.csv");
+        loadTileMap("../res/levels/Map4.csv");
     }
 
     private void loadTiles() {
@@ -32,19 +31,36 @@ public class TileManager {
             BufferedImage tileSheet = ImageIO.read(new File("../res/sprites/TileSheet.png"));
 
             final int width = tileSheet.getWidth();
+            final int height = tileSheet.getHeight();
+            int n = width / utility.getCHUNKSIZE() * height / utility.getCHUNKSIZE();
+            int k = 0;
 
-            for (int i = 0; i < width / utility.getCHUNKSIZE(); i++) {
-                tiles[i] = new Tile();
-                BufferedImage tempImage = tileSheet.getSubimage(i * utility.getCHUNKSIZE(), 0,
-                        utility.getCHUNKSIZE(),
-                        utility.getCHUNKSIZE());
-                BufferedImage scaledImage = utility.scaleImage(tempImage, utility.getTILESIZE(), utility.getTILESIZE());
-                tiles[i].setImage(scaledImage);
+            tiles = new Tile[n];
+
+            for (int i = 0; i < height / utility.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < width / utility.getCHUNKSIZE(); j++) {
+                    tiles[k] = new Tile();
+                    BufferedImage tempImage = tileSheet.getSubimage(j * utility.getCHUNKSIZE(),
+                            i * utility.getCHUNKSIZE(),
+                            utility.getCHUNKSIZE(),
+                            utility.getCHUNKSIZE());
+                    BufferedImage scaledImage = utility.scaleImage(tempImage, utility.getTILESIZE(),
+                            utility.getTILESIZE());
+                    tiles[k].setImage(scaledImage);
+                    k++;
+                }
             }
 
+            tiles[0].setCollision(true);
             tiles[1].setCollision(true);
-            tiles[3].setCollision(true);
+            tiles[2].setCollision(true);
             tiles[4].setCollision(true);
+            tiles[6].setCollision(true);
+            tiles[8].setCollision(true);
+            tiles[9].setCollision(true);
+            tiles[10].setCollision(true);
+            tiles[23].setCollision(true);
+            tiles[27].setCollision(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,9 +73,10 @@ public class TileManager {
 
             while (mapLoader.hasNextLine() && i < tileMap.length) {
                 String line = mapLoader.nextLine();
-
-                for (int j = 0; j < line.length(); j++) {
-                    int num = Character.getNumericValue(line.charAt(j));
+                String[] nums = line.split(",");
+                
+                for (int j = 0; j < nums.length; j++) {
+                    int num = Integer.parseInt(nums[j]);
                     tileMap[i][j] = num;
                 }
                 i++;

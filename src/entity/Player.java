@@ -34,8 +34,8 @@ public class Player extends Entity {
     }
 
     private void setDefaulValues() {
-        setWorldX(30 * utility.getTILESIZE());
-        setWorldY(30 * utility.getTILESIZE());
+        setWorldX(utility.getMAXWORLDCOL() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
+        setWorldY(utility.getMAXWORLDROW() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
         setSpeed(3);
         setDir("down");
     }
