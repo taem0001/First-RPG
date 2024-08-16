@@ -3,16 +3,16 @@ package object;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import helper.ScreenInfo;
+import helper.Utility;
 import main.GamePanel;
 
 public class SuperObject {
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
     private BufferedImage image;
     private String name;
     private boolean collision = false;
     private int worldX, worldY;
-    private Rectangle hitBox = new Rectangle(0, 0, screenInfo.getTILESIZE(), screenInfo.getTILESIZE());
+    private Rectangle hitBox = new Rectangle(0, 0, utility.getTILESIZE(), utility.getTILESIZE());
     private int hitBoxDefaultX = 0;
     private int hitBoxDefaultY = 0;
 
@@ -21,15 +21,14 @@ public class SuperObject {
         int screenY = worldY - gamePanel.getPlayer().getWorldY() + gamePanel.getPlayer().getSCREENY();
 
         if (worldX >= gamePanel.getPlayer().getWorldX() - gamePanel.getPlayer().getSCREENX()
-                - screenInfo.getTILESIZE()
+                - utility.getTILESIZE()
                 && worldX <= gamePanel.getPlayer().getWorldX() + gamePanel.getPlayer().getSCREENX()
-                        + 2 * screenInfo.getTILESIZE()
+                        + 2 * utility.getTILESIZE()
                 && worldY >= gamePanel.getPlayer().getWorldY() - gamePanel.getPlayer().getSCREENY()
-                        - screenInfo.getTILESIZE()
+                        - utility.getTILESIZE()
                 && worldY <= gamePanel.getPlayer().getWorldY() + gamePanel.getPlayer().getSCREENY()
-                        + screenInfo.getTILESIZE()) {
-            g.drawImage(image, screenX, screenY,
-                    screenInfo.getTILESIZE(), screenInfo.getTILESIZE(), null);
+                        + utility.getTILESIZE()) {
+            g.drawImage(image, screenX, screenY, null);
         }
     }
 

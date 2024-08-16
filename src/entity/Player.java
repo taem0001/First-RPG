@@ -2,14 +2,14 @@ package entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import helper.ScreenInfo;
+import helper.Utility;
 import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
     private GamePanel gamePanel;
     private KeyHandler keyH;
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
 
     private BufferedImage[] sprites;
     private final int SCREENX;
@@ -21,8 +21,8 @@ public class Player extends Entity {
         this.gamePanel = gamePanel;
         this.keyH = keyH;
 
-        SCREENX = screenInfo.getSCREENWIDTH() / 2 - (screenInfo.getTILESIZE() / 2);
-        SCREENY = screenInfo.getSCREENHEIGHT() / 2 - (screenInfo.getTILESIZE() / 2);
+        SCREENX = utility.getSCREENWIDTH() / 2 - (utility.getTILESIZE() / 2);
+        SCREENY = utility.getSCREENHEIGHT() / 2 - (utility.getTILESIZE() / 2);
 
         setHitBox(new Rectangle(8, 14, 16, 18));
         setHitBoxDefaultX(getHitBox().x);
@@ -34,8 +34,8 @@ public class Player extends Entity {
     }
 
     private void setDefaulValues() {
-        setWorldX(30 * screenInfo.getTILESIZE());
-        setWorldY(30 * screenInfo.getTILESIZE());
+        setWorldX(30 * utility.getTILESIZE());
+        setWorldY(30 * utility.getTILESIZE());
         setSpeed(3);
         setDir("down");
     }
@@ -152,8 +152,7 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g.drawImage(image, SCREENX, SCREENY, screenInfo.getTILESIZE(),
-                screenInfo.getTILESIZE(), null);
+        g.drawImage(image, SCREENX, SCREENY, null);
     }
 
     private void pickUpObject(int index) {
@@ -178,9 +177,9 @@ public class Player extends Entity {
                     }
                     break;
                 case "Chest":
-                    gamePanel.stop();
-                    gamePanel.stopMusic();
+                    // gamePanel.stopMusic();
                     gamePanel.playSe(9);
+                    gamePanel.stop();
                     break;
                 case "Boots":
                     gamePanel.playSe(16);

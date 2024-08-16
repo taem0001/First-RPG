@@ -1,13 +1,13 @@
 package entity;
 
 import java.awt.Rectangle;
-import helper.ScreenInfo;
+import helper.Utility;
 import main.GamePanel;
 import object.SuperObject;
 
 public class CollisionChecker {
     private GamePanel gamePanel;
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
 
     public CollisionChecker(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -20,16 +20,16 @@ public class CollisionChecker {
         int topY = entity.getWorldY() + hitBox.y;
         int botY = entity.getWorldY() + hitBox.y + hitBox.height;
 
-        int leftCol = leftX / screenInfo.getTILESIZE();
-        int rightCol = rightX / screenInfo.getTILESIZE();
-        int topRow = topY / screenInfo.getTILESIZE();
-        int botRow = botY / screenInfo.getTILESIZE();
+        int leftCol = leftX / utility.getTILESIZE();
+        int rightCol = rightX / utility.getTILESIZE();
+        int topRow = topY / utility.getTILESIZE();
+        int botRow = botY / utility.getTILESIZE();
 
         int tileNum1, tileNum2;
 
         switch (entity.getDir()) {
             case "up":
-                topRow = (topY - entity.getSpeed()) / screenInfo.getTILESIZE();
+                topRow = (topY - entity.getSpeed()) / utility.getTILESIZE();
                 tileNum1 = gamePanel.getTileManager().getTileMap()[topRow][leftCol];
                 tileNum2 = gamePanel.getTileManager().getTileMap()[topRow][rightCol];
 
@@ -39,7 +39,7 @@ public class CollisionChecker {
                 }
                 break;
             case "down":
-                botRow = (botY + entity.getSpeed()) / screenInfo.getTILESIZE();
+                botRow = (botY + entity.getSpeed()) / utility.getTILESIZE();
                 tileNum1 = gamePanel.getTileManager().getTileMap()[botRow][leftCol];
                 tileNum2 = gamePanel.getTileManager().getTileMap()[botRow][rightCol];
 
@@ -49,7 +49,7 @@ public class CollisionChecker {
                 }
                 break;
             case "left":
-                leftCol = (leftX - entity.getSpeed()) / screenInfo.getTILESIZE();
+                leftCol = (leftX - entity.getSpeed()) / utility.getTILESIZE();
                 tileNum1 = gamePanel.getTileManager().getTileMap()[topRow][leftCol];
                 tileNum2 = gamePanel.getTileManager().getTileMap()[botRow][leftCol];
 
@@ -59,7 +59,7 @@ public class CollisionChecker {
                 }
                 break;
             case "right":
-                rightCol = (rightX + entity.getSpeed()) / screenInfo.getTILESIZE();
+                rightCol = (rightX + entity.getSpeed()) / utility.getTILESIZE();
                 tileNum1 = gamePanel.getTileManager().getTileMap()[topRow][rightCol];
                 tileNum2 = gamePanel.getTileManager().getTileMap()[botRow][rightCol];
 

@@ -2,13 +2,13 @@ package main;
 
 import java.awt.*;
 import java.io.File;
-import helper.ScreenInfo;
+import helper.Utility;
 import object.ObjectKey;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
 public class UserInterface {
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
     private GamePanel gamePanel;
     private Font font;
     private BufferedImage keyImage;
@@ -35,18 +35,18 @@ public class UserInterface {
     public void draw(Graphics g) {
         if (!gamePanel.getGameRunning()) {
             drawText(g, Color.YELLOW, 70, "Congratulations!",
-                    screenInfo.getSCREENHEIGHT() / 2 - 1 * screenInfo.getTILESIZE());
-            drawText(g, Color.YELLOW, 35, "You beat the game!", screenInfo.getSCREENHEIGHT() / 2);
+                    utility.getSCREENHEIGHT() / 2 - 1 * utility.getTILESIZE());
+            drawText(g, Color.YELLOW, 35, "You beat the game!", utility.getSCREENHEIGHT() / 2);
             drawText(g, Color.WHITE, 35, "Time played: " + df.format(playTime),
-                    screenInfo.getSCREENHEIGHT() / 2 + 2 * screenInfo.getTILESIZE());
+                    utility.getSCREENHEIGHT() / 2 + 2 * utility.getTILESIZE());
         } else {
-            drawImage(g, keyImage, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE() / 2, screenInfo.getTILESIZE(),
-                    screenInfo.getTILESIZE());
+            drawImage(g, keyImage, utility.getTILESIZE() / 2, utility.getTILESIZE() / 2, utility.getTILESIZE(),
+                    utility.getTILESIZE());
             drawText(g, Color.WHITE, 35, "x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
             playTime += (double) 1 / 60;
 
             if (messageOn) {
-                drawText(g, Color.WHITE, 30, message, screenInfo.getTILESIZE() / 2, screenInfo.getSCREENHEIGHT() / 2);
+                drawText(g, Color.WHITE, 30, message, utility.getTILESIZE() / 2, utility.getSCREENHEIGHT() / 2);
 
                 messageTick++;
 
@@ -68,7 +68,7 @@ public class UserInterface {
         g.setFont(font);
         g.setFont(g.getFont().deriveFont(Font.BOLD, fontSize));
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(text, ((int) screenInfo.getSCREENWIDTH() - metrics.stringWidth(text)) / 2, y);
+        g.drawString(text, ((int) utility.getSCREENWIDTH() - metrics.stringWidth(text)) / 2, y);
     }
 
     private void drawText(Graphics g, Color c, int fontSize, String text, int x, int y) {

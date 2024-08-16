@@ -5,7 +5,7 @@ import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import helper.ScreenInfo;
+import helper.Utility;
 
 public abstract class Entity {
     private int worldX, worldY;
@@ -17,7 +17,7 @@ public abstract class Entity {
     private int spriteCounter = 0;
     private int spriteNum = 1;
 
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
 
     private Rectangle hitBox;
     private int hitBoxDefaultX, hitBoxDefaultY;
@@ -129,16 +129,17 @@ public abstract class Entity {
 
             final int width = spriteSheet.getWidth();
             final int height = spriteSheet.getHeight();
-            int n = (width / screenInfo.getCHUNKSIZE()) * (height / screenInfo.getCHUNKSIZE());
+            int n = (width / utility.getCHUNKSIZE()) * (height / utility.getCHUNKSIZE());
 
             sprites = new BufferedImage[n];
             int k = 0;
 
-            for (int i = 0; i < width / screenInfo.getCHUNKSIZE(); i++) {
-                for (int j = 0; j < height / screenInfo.getCHUNKSIZE(); j++) {
-                    BufferedImage tempImage = spriteSheet.getSubimage(j * screenInfo.getCHUNKSIZE(),
-                            i * screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE(), screenInfo.getCHUNKSIZE());
-                    sprites[k] = tempImage;
+            for (int i = 0; i < width / utility.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < height / utility.getCHUNKSIZE(); j++) {
+                    BufferedImage tempImage = spriteSheet.getSubimage(j * utility.getCHUNKSIZE(),
+                            i * utility.getCHUNKSIZE(), utility.getCHUNKSIZE(), utility.getCHUNKSIZE());
+                    BufferedImage scaledImage = utility.scaleImage(tempImage, utility.getTILESIZE(), utility.getTILESIZE());
+                    sprites[k] = scaledImage;
                     k++;
                 }
             }

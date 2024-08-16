@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import entity.CollisionChecker;
 import entity.Player;
-import helper.ScreenInfo;
+import helper.Utility;
 import object.SuperObject;
 import tile.TileManager;
 
@@ -13,7 +13,7 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean running = false;
     private final int FPS = 60;
 
-    private ScreenInfo screenInfo = new ScreenInfo();
+    private Utility utility = new Utility();
     private KeyHandler keyH = new KeyHandler();
     private Sound music = new Sound();
     private Sound se = new Sound();
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
     private SuperObject[] objects = new SuperObject[10];
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenInfo.getSCREENWIDTH(), screenInfo.getSCREENHEIGHT()));
+        this.setPreferredSize(new Dimension(utility.getSCREENWIDTH(), utility.getSCREENHEIGHT()));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void gameSetUp() {
         assetManager.setObjects();
-        playMusic(1);
+        // playMusic(1);
     }
 
     public synchronized void start() {
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        } 
     }
 
     private void update() {
