@@ -16,14 +16,22 @@ public class AssetManager {
     }
 
     public void setObjects() {
-        // insertObject(new ObjectKey(), 0, 46, 32);
-        // insertObject(new ObjectKey(), 1, 24, 32);
-        // insertObject(new ObjectKey(), 2, 8, 29);
-        // insertObject(new ObjectChest(), 3, 39, 17);
-        // insertObject(new ObjectDoor(), 4, 35, 19);
-        // insertObject(new ObjectDoor(), 5, 26, 30);
-        // insertObject(new ObjectDoor(), 6, 42, 32);
-        // insertObject(new ObjectBoots(), 7, 27, 21);
+        insertObject(new ObjectDoor(), 0, 17, 15);
+        insertObject(new ObjectDoor(), 1, 15, 23);
+        insertObject(new ObjectDoor(), 2, 18, 35);
+        insertObject(new ObjectDoor(), 3, 27, 55);
+        insertObject(new ObjectDoor(), 4, 45, 35);
+        insertObject(new ObjectDoor(), 5, 50, 29);
+        insertObject(new ObjectDoor(), 6, 50, 19);
+        insertObject(new ObjectKey(), 7, 55, 45);
+        insertObject(new ObjectKey(), 8, 13, 37);
+        insertObject(new ObjectKey(), 9, 12, 23);
+        insertObject(new ObjectKey(), 10, 13, 14);
+        insertObject(new ObjectKey(), 11, 21, 44);
+        insertObject(new ObjectKey(), 12, 26, 57);
+        insertObject(new ObjectKey(), 13, 50, 24);
+        insertObject(new ObjectChest(), 14, 50, 15);
+        insertObject(new ObjectBoots(), 15, 46, 14);
     }
 
     private void insertObject(SuperObject object, int index, int col, int row) {
