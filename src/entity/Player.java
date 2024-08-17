@@ -15,8 +15,6 @@ public class Player extends Entity {
     private final int SCREENX;
     private final int SCREENY;
 
-    private int keyNum = 0;
-
     public Player(GamePanel gamePanel, KeyHandler keyH) {
         this.gamePanel = gamePanel;
         this.keyH = keyH;
@@ -157,37 +155,7 @@ public class Player extends Entity {
 
     private void pickUpObject(int index) {
         if (index != 999) {
-            String objName = gamePanel.getObjects()[index].getName();
-
-            switch (objName) {
-                case "Key":
-                    gamePanel.playSe(4);
-                    keyNum++;
-                    gamePanel.getObjects()[index] = null;
-                    gamePanel.getUserInterface().showMessage("Key obtained!");
-                    break;
-                case "Door":
-                    if (keyNum > 0) {
-                        gamePanel.playSe(21);
-                        gamePanel.getObjects()[index] = null;
-                        keyNum--;
-                        gamePanel.getUserInterface().showMessage("Door opened!");
-                    } else {
-                        gamePanel.getUserInterface().showMessage("Key needed!");
-                    }
-                    break;
-                case "Chest":
-                    // gamePanel.stopMusic();
-                    gamePanel.playSe(9);
-                    gamePanel.stop();
-                    break;
-                case "Boots":
-                    gamePanel.playSe(16);
-                    setSpeed(getSpeed() + 1);
-                    gamePanel.getObjects()[index] = null;
-                    gamePanel.getUserInterface().showMessage("Speed up!");
-                    break;
-            }
+            
         }
     }
 
@@ -197,9 +165,5 @@ public class Player extends Entity {
 
     public int getSCREENY() {
         return SCREENY;
-    }
-
-    public int getKeyNum() {
-        return keyNum;
     }
 }

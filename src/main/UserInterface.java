@@ -3,21 +3,16 @@ package main;
 import java.awt.*;
 import java.io.File;
 import helper.Utility;
-import object.ObjectKey;
 import java.awt.image.BufferedImage;
-import java.text.DecimalFormat;
 
 public class UserInterface {
     private Utility utility = new Utility();
     private GamePanel gamePanel;
     private Font font;
-    private BufferedImage keyImage;
-    DecimalFormat df = new DecimalFormat("#0.00");
 
     private boolean messageOn = false;
     private String message = "";
     private int messageTick = 0;
-    private double playTime = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -27,55 +22,19 @@ public class UserInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        ObjectKey key = new ObjectKey();
-        keyImage = key.getImage();
     }
 
-    public void draw(Graphics g) {
-        if (!gamePanel.getGameRunning()) {
-            drawGameEnd(g);
-        } else {
-            if (gamePanel.getGameState() == utility.getPLAYSTATE()) {
-                drawGameGUI(g);
-            } else if (gamePanel.getGameState() == utility.getPAUSESTATE()) {
-                drawPauseScreen(g);
-            }
+    public void draw(Graphics2D g) {
+        if (gamePanel.getGameState() == utility.getPLAYSTATE()) {
+            
+        }
+        if (gamePanel.getGameState() == utility.getPAUSESTATE()) {
+            drawPauseScreen(g);
         }
     }
 
     private void drawPauseScreen(Graphics g) {
-        drawText(g, Color.WHITE, 50, "Paused", utility.getSCREENHEIGHT() / 2 - utility.getTILESIZE());
-    }
-
-    private void drawGameGUI(Graphics g) {
-        drawImage(g, keyImage, utility.getTILESIZE() / 2, utility.getTILESIZE() / 2, utility.getTILESIZE(),
-                utility.getTILESIZE());
-
-        drawText(g, Color.WHITE, 35, "x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
-
-        playTime += (double) 1 / 60;
-
-        if (messageOn) {
-            drawText(g, Color.WHITE, 30, message, utility.getTILESIZE() / 2, utility.getSCREENHEIGHT() / 2);
-
-            messageTick++;
-
-            if (messageTick > 130) {
-                messageTick = 0;
-                messageOn = false;
-            }
-        }
-    }
-
-    private void drawGameEnd(Graphics g) {
-        drawText(g, Color.YELLOW, 70, "Congratulations!",
-                utility.getSCREENHEIGHT() / 2 - 1 * utility.getTILESIZE());
-
-        drawText(g, Color.YELLOW, 35, "You beat the game!", utility.getSCREENHEIGHT() / 2);
-
-        drawText(g, Color.WHITE, 35, "Time played: " + df.format(playTime),
-                utility.getSCREENHEIGHT() / 2 + 2 * utility.getTILESIZE());
+        drawText(g, Color.WHITE, 70, "Paused", utility.getSCREENHEIGHT() / 2);
     }
 
     public void showMessage(String text) {
@@ -87,8 +46,11 @@ public class UserInterface {
         g.setColor(c);
         g.setFont(font);
         g.setFont(g.getFont().deriveFont(Font.BOLD, fontSize));
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(text, ((int) utility.getSCREENWIDTH() - metrics.stringWidth(text)) / 2, y);
+        
+        int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
+        int x = utility.getSCREENWIDTH() / 2 - length / 2;
+
+        g.drawString(text, x, y);
     }
 
     private void drawText(Graphics g, Color c, int fontSize, String text, int x, int y) {
