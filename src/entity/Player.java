@@ -59,6 +59,9 @@ public class Player extends Entity {
             int objectIndex = gamePanel.getCollisionChecker().checkObject(this, true);
             pickUpObject(objectIndex);
 
+            int npcIndex = gamePanel.getCollisionChecker().checkEntity(this, gamePanel.getNpcEntities());
+            interactNPC(npcIndex);
+
             if (!getCollisionOn()) {
                 switch (direction) {
                     case "up":
@@ -156,6 +159,12 @@ public class Player extends Entity {
     private void pickUpObject(int index) {
         if (index != 999) {
 
+        }
+    }
+
+    private void interactNPC(int index) {
+        if (index != 999) {
+            System.out.println("Collision!");
         }
     }
 

@@ -225,6 +225,8 @@ public class Entity {
 
         collisionOn = false;
         gamePanel.getCollisionChecker().checkTile(this);
+        gamePanel.getCollisionChecker().checkObject(this, false);
+        gamePanel.getCollisionChecker().checkPlayer(this);
 
         if (!getCollisionOn()) {
             switch (getDir()) {

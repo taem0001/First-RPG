@@ -1,11 +1,9 @@
 package entity;
 
 import main.GamePanel;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class NPC_OldMan extends Entity {
-    private BufferedImage[] sprites;
     private Random rand = new Random();
 
     public NPC_OldMan(GamePanel gamePanel) {
@@ -16,7 +14,6 @@ public class NPC_OldMan extends Entity {
 
     private void setNPCInfo() {
         loadSprites("../res/sprites/OldManSpriteSheet.png");
-        sprites = getSprites();
 
         setDir("down");
         setSpeed(1);

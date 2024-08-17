@@ -115,4 +115,73 @@ public class CollisionChecker {
 
         return index;
     }
+
+    public int checkEntity(Entity entity, Entity[] target) {
+        int index = 999;
+        int tempIndex = 0;
+
+        for (Entity otherEntity : target) {
+            if (otherEntity != null) {
+                entity.getHitBox().x += entity.getWorldX();
+                entity.getHitBox().y += entity.getWorldY();
+
+                otherEntity.getHitBox().x += otherEntity.getWorldX();
+                otherEntity.getHitBox().y += otherEntity.getWorldY();
+
+                int dx = 0, dy = 0;
+                switch (entity.getDir()) {
+                    case "up" -> dy = -entity.getSpeed();
+                    case "down" -> dy = entity.getSpeed();
+                    case "left" -> dx = -entity.getSpeed();
+                    case "right" -> dx = entity.getSpeed();
+                }
+
+                entity.getHitBox().x += dx;
+                entity.getHitBox().y += dy;
+
+                if (entity.getHitBox().intersects(otherEntity.getHitBox())) {
+                    entity.setCollisionOn(true);
+                    index = tempIndex;
+                }
+
+                entity.getHitBox().x = entity.getHitBoxDefaultX();
+                entity.getHitBox().y = entity.getHitBoxDefaultY();
+
+                otherEntity.getHitBox().x = otherEntity.getHitBoxDefaultX();
+                otherEntity.getHitBox().y = otherEntity.getHitBoxDefaultY();
+            }
+            tempIndex++;
+        }
+
+        return index;
+    }
+
+    public void checkPlayer(Entity entity) {
+        entity.getHitBox().x += entity.getWorldX();
+        entity.getHitBox().y += entity.getWorldY();
+
+        gamePanel.getPlayer().getHitBox().x += gamePanel.getPlayer().getWorldX();
+        gamePanel.getPlayer().getHitBox().y += gamePanel.getPlayer().getWorldY();
+
+        int dx = 0, dy = 0;
+        switch (entity.getDir()) {
+            case "up" -> dy = -entity.getSpeed();
+            case "down" -> dy = entity.getSpeed();
+            case "left" -> dx = -entity.getSpeed();
+            case "right" -> dx = entity.getSpeed();
+        }
+
+        entity.getHitBox().x += dx;
+        entity.getHitBox().y += dy;
+
+        if (entity.getHitBox().intersects(gamePanel.getPlayer().getHitBox())) {
+            entity.setCollisionOn(true);
+        }
+
+        entity.getHitBox().x = entity.getHitBoxDefaultX();
+        entity.getHitBox().y = entity.getHitBoxDefaultY();
+
+        gamePanel.getPlayer().getHitBox().x = gamePanel.getPlayer().getHitBoxDefaultX();
+        gamePanel.getPlayer().getHitBox().y = gamePanel.getPlayer().getHitBoxDefaultY();
+    }
 }
