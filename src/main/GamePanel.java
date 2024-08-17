@@ -12,9 +12,10 @@ import tile.TileManager;
 public class GamePanel extends JPanel implements Runnable {
     private boolean running = false;
     private final int FPS = 60;
+    private int gameState;
 
     private Utility utility = new Utility();
-    private KeyHandler keyH = new KeyHandler();
+    private KeyHandler keyH = new KeyHandler(this);
     private Sound music = new Sound();
     private Sound se = new Sound();
     private TileManager tileManager = new TileManager(this);
@@ -35,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void gameSetUp() {
         assetManager.setObjects();
         // playMusic(1);
+        gameState = utility.getPLAYSTATE();
     }
 
     public synchronized void start() {
@@ -66,11 +68,15 @@ public class GamePanel extends JPanel implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } 
+        }
     }
 
     private void update() {
-        player.update();
+        if (gameState == utility.getPLAYSTATE()) {
+            player.update();
+        } else if (gameState == utility.getPAUSESTATE()) {
+
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -127,5 +133,13 @@ public class GamePanel extends JPanel implements Runnable {
 
     public boolean getGameRunning() {
         return running;
+    }
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int state) {
+        gameState = state;
     }
 }

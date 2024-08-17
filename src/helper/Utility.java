@@ -15,6 +15,9 @@ public class Utility {
     private final int WORLDWIDTH = MAXSCREENCOL * TILESIZE;
     private final int WORLDHEIGHT = MAXSCREENROW * TILESIZE;
 
+    private final int PLAYSTATE = 1;
+    private final int PAUSESTATE = 2;
+
     public BufferedImage scaleImage(BufferedImage originalImage, int width, int height) {
         BufferedImage result = new BufferedImage(width, height, originalImage.getType());
         Graphics2D g = result.createGraphics();
@@ -62,5 +65,13 @@ public class Utility {
 
     public int getWORLDWIDTH() {
         return WORLDWIDTH;
+    }
+
+    public int getPAUSESTATE() {
+        return PAUSESTATE;
+    }
+
+    public int getPLAYSTATE() {
+        return PLAYSTATE;
     }
 }

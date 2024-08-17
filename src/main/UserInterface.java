@@ -34,28 +34,48 @@ public class UserInterface {
 
     public void draw(Graphics g) {
         if (!gamePanel.getGameRunning()) {
-            drawText(g, Color.YELLOW, 70, "Congratulations!",
-                    utility.getSCREENHEIGHT() / 2 - 1 * utility.getTILESIZE());
-            drawText(g, Color.YELLOW, 35, "You beat the game!", utility.getSCREENHEIGHT() / 2);
-            drawText(g, Color.WHITE, 35, "Time played: " + df.format(playTime),
-                    utility.getSCREENHEIGHT() / 2 + 2 * utility.getTILESIZE());
+            drawGameEnd(g);
         } else {
-            drawImage(g, keyImage, utility.getTILESIZE() / 2, utility.getTILESIZE() / 2, utility.getTILESIZE(),
-                    utility.getTILESIZE());
-            drawText(g, Color.WHITE, 35, "x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
-            playTime += (double) 1 / 60;
-
-            if (messageOn) {
-                drawText(g, Color.WHITE, 30, message, utility.getTILESIZE() / 2, utility.getSCREENHEIGHT() / 2);
-
-                messageTick++;
-
-                if (messageTick > 130) {
-                    messageTick = 0;
-                    messageOn = false;
-                }
+            if (gamePanel.getGameState() == utility.getPLAYSTATE()) {
+                drawGameGUI(g);
+            } else if (gamePanel.getGameState() == utility.getPAUSESTATE()) {
+                drawPauseScreen(g);
             }
         }
+    }
+
+    private void drawPauseScreen(Graphics g) {
+        drawText(g, Color.WHITE, 50, "Paused", utility.getSCREENHEIGHT() / 2 - utility.getTILESIZE());
+    }
+
+    private void drawGameGUI(Graphics g) {
+        drawImage(g, keyImage, utility.getTILESIZE() / 2, utility.getTILESIZE() / 2, utility.getTILESIZE(),
+                utility.getTILESIZE());
+
+        drawText(g, Color.WHITE, 35, "x " + gamePanel.getPlayer().getKeyNum(), 50, 40);
+
+        playTime += (double) 1 / 60;
+
+        if (messageOn) {
+            drawText(g, Color.WHITE, 30, message, utility.getTILESIZE() / 2, utility.getSCREENHEIGHT() / 2);
+
+            messageTick++;
+
+            if (messageTick > 130) {
+                messageTick = 0;
+                messageOn = false;
+            }
+        }
+    }
+
+    private void drawGameEnd(Graphics g) {
+        drawText(g, Color.YELLOW, 70, "Congratulations!",
+                utility.getSCREENHEIGHT() / 2 - 1 * utility.getTILESIZE());
+
+        drawText(g, Color.YELLOW, 35, "You beat the game!", utility.getSCREENHEIGHT() / 2);
+
+        drawText(g, Color.WHITE, 35, "Time played: " + df.format(playTime),
+                utility.getSCREENHEIGHT() / 2 + 2 * utility.getTILESIZE());
     }
 
     public void showMessage(String text) {
