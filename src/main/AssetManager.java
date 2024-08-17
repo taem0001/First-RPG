@@ -1,5 +1,7 @@
 package main;
 
+import entity.Entity;
+import entity.NPC_OldMan;
 import helper.Utility;
 import object.ObjectBoots;
 import object.ObjectChest;
@@ -17,6 +19,16 @@ public class AssetManager {
 
     public void setObjects() {
         
+    }
+
+    public void setNPC() {
+        insertNPC(new NPC_OldMan(gamePanel), 0, 25, 58);
+    }
+
+    private void insertNPC(Entity npc, int index, int col, int row) {
+        gamePanel.getNpcEntities()[index] = npc;
+        gamePanel.getNpcEntities()[index].setWorldX(col * utility.getTILESIZE());
+        gamePanel.getNpcEntities()[index].setWorldY(row * utility.getTILESIZE());
     }
 
     private void insertObject(SuperObject object, int index, int col, int row) {

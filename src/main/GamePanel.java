@@ -3,7 +3,7 @@ package main;
 import java.awt.*;
 import javax.swing.*;
 
-import entity.CollisionChecker;
+import entity.Entity;
 import entity.Player;
 import helper.Utility;
 import object.SuperObject;
@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Player player = new Player(this, keyH);
     private SuperObject[] objects = new SuperObject[20];
+    private Entity[] npcEntities = new Entity[10];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(utility.getSCREENWIDTH(), utility.getSCREENHEIGHT()));
@@ -35,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void gameSetUp() {
         assetManager.setObjects();
+        assetManager.setNPC();
         // playMusic(1);
         gameState = utility.getPLAYSTATE();
     }
@@ -74,6 +76,12 @@ public class GamePanel extends JPanel implements Runnable {
     private void update() {
         if (gameState == utility.getPLAYSTATE()) {
             player.update();
+
+            for (Entity npc : npcEntities) {
+                if (npc != null) {
+                    npc.update();
+                }
+            }
         } else if (gameState == utility.getPAUSESTATE()) {
 
         }
@@ -87,6 +95,12 @@ public class GamePanel extends JPanel implements Runnable {
         for (SuperObject object : objects) {
             if (object != null) {
                 object.draw(g, this);
+            }
+        }
+
+        for (Entity npc : npcEntities) {
+            if (npc != null) {
+                npc.draw(g);
             }
         }
 
@@ -141,5 +155,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setGameState(int state) {
         gameState = state;
+    }
+
+    public Entity[] getNpcEntities() {
+        return npcEntities;
     }
 }

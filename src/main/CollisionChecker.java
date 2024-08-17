@@ -1,8 +1,9 @@
-package entity;
+package main;
 
 import java.awt.Rectangle;
+
+import entity.Entity;
 import helper.Utility;
-import main.GamePanel;
 import object.SuperObject;
 
 public class CollisionChecker {

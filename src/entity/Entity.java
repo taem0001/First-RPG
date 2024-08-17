@@ -1,27 +1,31 @@
 package entity;
 
-import java.awt.Rectangle;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import helper.Utility;
+import java.awt.*;
+import main.GamePanel;
 
-public abstract class Entity {
+public class Entity {
+    protected GamePanel gamePanel;
+
     private int worldX, worldY;
     private int speed;
-
     private BufferedImage[] sprites;
     private String dir;
-
     private int spriteCounter = 0;
     private int spriteNum = 1;
-
     private Utility utility = new Utility();
-
-    private Rectangle hitBox;
+    private Rectangle hitBox = new Rectangle(0, 0, utility.getTILESIZE(), utility.getTILESIZE());
     private int hitBoxDefaultX, hitBoxDefaultY;
     private boolean collisionOn = false;
+    private int actionLockCounter = 0;
+
+    public Entity(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 
     public void changeWorldX(int n) {
         worldX += n;
@@ -123,6 +127,18 @@ public abstract class Entity {
         this.hitBoxDefaultY = hitBoxDefaultY;
     }
 
+    public int getActionLockCounter() {
+        return actionLockCounter;
+    }
+
+    public void resetActionLockCounter() {
+        actionLockCounter = 0;
+    }
+
+    public void incrementActionLockCounter() {
+        actionLockCounter++;
+    }
+
     public void loadSprites(String url) {
         try {
             BufferedImage spriteSheet = ImageIO.read(new File(url));
@@ -134,8 +150,8 @@ public abstract class Entity {
             sprites = new BufferedImage[n];
             int k = 0;
 
-            for (int i = 0; i < width / utility.getCHUNKSIZE(); i++) {
-                for (int j = 0; j < height / utility.getCHUNKSIZE(); j++) {
+            for (int i = 0; i < height / utility.getCHUNKSIZE(); i++) {
+                for (int j = 0; j < width / utility.getCHUNKSIZE(); j++) {
                     BufferedImage tempImage = spriteSheet.getSubimage(j * utility.getCHUNKSIZE(),
                             i * utility.getCHUNKSIZE(), utility.getCHUNKSIZE(), utility.getCHUNKSIZE());
                     BufferedImage scaledImage = utility.scaleImage(tempImage, utility.getTILESIZE(),
@@ -146,6 +162,96 @@ public abstract class Entity {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void draw(Graphics g) {
+        BufferedImage image = null;
+        int screenX = worldX - gamePanel.getPlayer().getWorldX() + gamePanel.getPlayer().getSCREENX();
+        int screenY = worldY - gamePanel.getPlayer().getWorldY() + gamePanel.getPlayer().getSCREENY();
+
+        if (worldX >= gamePanel.getPlayer().getWorldX() - gamePanel.getPlayer().getSCREENX()
+                - utility.getTILESIZE()
+                && worldX <= gamePanel.getPlayer().getWorldX() + gamePanel.getPlayer().getSCREENX()
+                        + 2 * utility.getTILESIZE()
+                && worldY >= gamePanel.getPlayer().getWorldY() - gamePanel.getPlayer().getSCREENY()
+                        - utility.getTILESIZE()
+                && worldY <= gamePanel.getPlayer().getWorldY() + gamePanel.getPlayer().getSCREENY()
+                        + utility.getTILESIZE()) {
+            switch (getDir()) {
+                case "up":
+                    if (getSpriteNum() == 1) {
+                        image = sprites[2];
+                    }
+                    if (getSpriteNum() == 2) {
+                        image = sprites[3];
+                    }
+                    break;
+                case "down":
+                    if (getSpriteNum() == 1) {
+                        image = sprites[0];
+                    }
+                    if (getSpriteNum() == 2) {
+                        image = sprites[1];
+                    }
+                    break;
+                case "left":
+                    if (getSpriteNum() == 1) {
+                        image = sprites[4];
+                    }
+                    if (getSpriteNum() == 2) {
+                        image = sprites[5];
+                    }
+                    break;
+                case "right":
+                    if (getSpriteNum() == 1) {
+                        image = sprites[6];
+                    }
+                    if (getSpriteNum() == 2) {
+                        image = sprites[7];
+                    }
+                    break;
+            }
+            g.drawImage(image, screenX, screenY, null);
+        }
+    }
+
+    public void setAction() {
+
+    }
+
+    public void update() {
+        setAction();
+
+        collisionOn = false;
+        gamePanel.getCollisionChecker().checkTile(this);
+
+        if (!getCollisionOn()) {
+            switch (getDir()) {
+                case "up":
+                    changeWorldY(-getSpeed());
+                    break;
+                case "down":
+                    changeWorldY(getSpeed());
+                    break;
+                case "left":
+                    changeWorldX(-getSpeed());
+                    break;
+                case "right":
+                    changeWorldX(getSpeed());
+                    break;
+            }
+        }
+
+        incrementSpriteCounter();
+
+        if (getSpriteCounter() > 12) {
+            if (getSpriteNum() < 2) {
+                incrementSpriteNum();
+            } else {
+                resetSpriteNum();
+            }
+            resetSpriteCounter();
         }
     }
 }

@@ -7,7 +7,6 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
-    private GamePanel gamePanel;
     private KeyHandler keyH;
     private Utility utility = new Utility();
 
@@ -16,22 +15,23 @@ public class Player extends Entity {
     private final int SCREENY;
 
     public Player(GamePanel gamePanel, KeyHandler keyH) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         this.keyH = keyH;
 
         SCREENX = utility.getSCREENWIDTH() / 2 - (utility.getTILESIZE() / 2);
         SCREENY = utility.getSCREENHEIGHT() / 2 - (utility.getTILESIZE() / 2);
 
+        setPlayerInfo();
+    }
+
+    private void setPlayerInfo() {
         setHitBox(new Rectangle(8, 14, 16, 18));
         setHitBoxDefaultX(getHitBox().x);
         setHitBoxDefaultY(getHitBox().y);
 
-        setDefaulValues();
         loadSprites("../res/sprites/PlayerSprites.png");
         sprites = getSprites();
-    }
-
-    private void setDefaulValues() {
+        
         setWorldX(utility.getMAXWORLDCOL() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
         setWorldY(utility.getMAXWORLDROW() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
         setSpeed(3);
@@ -155,7 +155,7 @@ public class Player extends Entity {
 
     private void pickUpObject(int index) {
         if (index != 999) {
-            
+
         }
     }
 
