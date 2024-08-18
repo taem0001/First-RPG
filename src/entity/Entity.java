@@ -22,6 +22,8 @@ public class Entity {
     private int hitBoxDefaultX, hitBoxDefaultY;
     private boolean collisionOn = false;
     private int actionLockCounter = 0;
+    private String[] dialogues = new String[30]; 
+    private int dialogeIndex = 0;
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -139,6 +141,18 @@ public class Entity {
         actionLockCounter++;
     }
 
+    public String[] getDialogues() {
+        return dialogues;
+    }
+
+    public int getDialogeIndex() {
+        return dialogeIndex;
+    }
+
+    public void setDialogeIndex(int n) {
+        dialogeIndex = n;
+    }
+
     public void loadSprites(String url) {
         try {
             BufferedImage spriteSheet = ImageIO.read(new File(url));
@@ -218,6 +232,22 @@ public class Entity {
 
     public void setAction() {
 
+    }
+
+    public void speakDialogue() {
+        if (dialogues[dialogeIndex] == null) {
+            dialogeIndex = 0;
+        }
+
+        gamePanel.getUserInterface().setCurrentDialogue(dialogues[dialogeIndex]);
+        dialogeIndex++;
+
+        switch (gamePanel.getPlayer().getDir()) {
+            case "up" -> setDir("down");
+            case "down" -> setDir("up");
+            case "left" -> setDir("right");
+            case "right" -> setDir("left");
+        }
     }
 
     public void update() {

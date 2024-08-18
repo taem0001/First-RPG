@@ -31,7 +31,7 @@ public class Player extends Entity {
 
         loadSprites("../res/sprites/PlayerSprites.png");
         sprites = getSprites();
-        
+
         setWorldX(utility.getMAXWORLDCOL() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
         setWorldY(utility.getMAXWORLDROW() / 2 * utility.getTILESIZE() - (utility.getTILESIZE() / 2));
         setSpeed(3);
@@ -164,7 +164,10 @@ public class Player extends Entity {
 
     private void interactNPC(int index) {
         if (index != 999) {
-            System.out.println("Collision!");
+            if (keyH.getInteract()) {
+                gamePanel.setGameState(utility.getDIALOGUESTATE());
+                gamePanel.getNpcEntities()[index].speakDialogue();
+            }
         }
     }
 

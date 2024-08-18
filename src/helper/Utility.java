@@ -17,6 +17,7 @@ public class Utility {
 
     private final int PLAYSTATE = 1;
     private final int PAUSESTATE = 2;
+    private final int DIALOGUESTATE = 3;
 
     public BufferedImage scaleImage(BufferedImage originalImage, int width, int height) {
         BufferedImage result = new BufferedImage(width, height, originalImage.getType());
@@ -73,5 +74,9 @@ public class Utility {
 
     public int getPLAYSTATE() {
         return PLAYSTATE;
+    }
+
+    public int getDIALOGUESTATE() {
+        return DIALOGUESTATE;
     }
 }

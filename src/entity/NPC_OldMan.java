@@ -10,6 +10,7 @@ public class NPC_OldMan extends Entity {
         super(gamePanel);
 
         setNPCInfo();
+        setDialogue();
     }
 
     private void setNPCInfo() {
@@ -40,5 +41,16 @@ public class NPC_OldMan extends Entity {
 
             resetActionLockCounter();
         }
+    }
+
+    private void setDialogue() {
+        getDialogues()[0] = "Hello, young man.";
+        getDialogues()[1] = "So, you've come to this island to claim \nthe treassure?";
+        getDialogues()[2] = "I used to be a great wizard, but now... \nI'm a bit too old for adventuring.";
+        getDialogues()[3] = "Well, good luck to you!";
+    }
+
+    public void speakDialogue() {
+        super.speakDialogue();
     }
 }

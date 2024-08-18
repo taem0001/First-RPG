@@ -7,7 +7,7 @@ import helper.Utility;
 public class KeyHandler implements KeyListener {
     private Utility utility = new Utility();
     private GamePanel gamePanel;
-    private boolean up, down, left, right;
+    private boolean up, down, left, right, interact;
 
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -21,27 +21,36 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        int gameState = gamePanel.getGameState();
 
-        if (code == KeyEvent.VK_UP) {
-            up = true;
-        }
-        if (code == KeyEvent.VK_DOWN) {
-            down = true;
-        }
-        if (code == KeyEvent.VK_LEFT) {
-            left = true;
-        }
-        if (code == KeyEvent.VK_RIGHT) {
-            right = true;
-        }
-        if (code == KeyEvent.VK_ESCAPE) {
-            int gameState = gamePanel.getGameState();
-            if (gameState == utility.getPLAYSTATE() || gameState == utility.getPAUSESTATE()) {
-                gamePanel.setGameState(
-                        gameState == utility.getPLAYSTATE() ? utility.getPAUSESTATE() : utility.getPLAYSTATE());
+        if (gameState == utility.getPLAYSTATE()) {
+            if (code == KeyEvent.VK_UP) {
+                up = true;
+            }
+            if (code == KeyEvent.VK_DOWN) {
+                down = true;
+            }
+            if (code == KeyEvent.VK_LEFT) {
+                left = true;
+            }
+            if (code == KeyEvent.VK_RIGHT) {
+                right = true;
+            }
+            if (code == KeyEvent.VK_ESCAPE) {
+                gamePanel.setGameState(utility.getPAUSESTATE());
+            }
+            if (code == KeyEvent.VK_E) {
+                interact = true;
+            }
+        } else if (gameState == utility.getPAUSESTATE()) {
+            if (code == KeyEvent.VK_ESCAPE) {
+                gamePanel.setGameState(utility.getPLAYSTATE());
+            }
+        } else if (gameState == utility.getDIALOGUESTATE()) {
+            if (code == KeyEvent.VK_ENTER) {
+                gamePanel.setGameState(utility.getPLAYSTATE());
             }
         }
-
     }
 
     @Override
@@ -60,6 +69,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_RIGHT) {
             right = false;
         }
+        if (code == KeyEvent.VK_E) {
+            interact = false;
+        }
     }
 
     public boolean getUp() {
@@ -76,5 +88,9 @@ public class KeyHandler implements KeyListener {
 
     public boolean getRight() {
         return right;
+    }
+
+    public boolean getInteract() {
+        return interact;
     }
 }
