@@ -6,35 +6,69 @@ import helper.Utility;
 import java.awt.image.BufferedImage;
 
 public class UserInterface {
-    private Utility utility = new Utility();
     private GamePanel gamePanel;
+    private Utility utility = new Utility();
     private Font font;
 
     private boolean messageOn = false;
     private String message = "";
     private int messageTick = 0;
     private String currentDialogue;
+    private int selectNum = 0;
 
     public UserInterface(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("../res/fonts/Pixeboy-z8XGD.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("../res/fonts/PixeBoy-z8XGD.ttf"));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void draw(Graphics2D g) {
-        if (gamePanel.getGameState() == utility.getPLAYSTATE()) {
-            
+        int gameState = gamePanel.getGameState();
+
+        if (gameState == utility.getTITLESTATE()) {
+            drawTitleScreen(g);
         }
-        if (gamePanel.getGameState() == utility.getPAUSESTATE()) {
+        if (gameState == utility.getPLAYSTATE()) {
+
+        }
+        if (gameState == utility.getPAUSESTATE()) {
             drawPauseScreen(g);
         }
-        if (gamePanel.getGameState() == utility.getDIALOGUESTATE()) {
+        if (gameState == utility.getDIALOGUESTATE()) {
             drawDialogueScreen(g);
         }
+    }
+
+    private void drawTitleScreen(Graphics2D g) {
+        String text = "RPG adventure game";
+        int y = 2 * utility.getTILESIZE();
+        drawText(g, Color.GRAY, 60, Font.PLAIN, text, y + 5);
+        drawText(g, Color.WHITE, 60, Font.PLAIN, text, y);
+
+        text = "New game";
+        y = utility.getSCREENHEIGHT() / 2 - utility.getTILESIZE();
+        if (selectNum == 0)
+            drawText(g, Color.YELLOW, 45, Font.PLAIN, text, y);
+        else
+            drawText(g, Color.WHITE, 45, Font.PLAIN, text, y);
+
+        text = "Load game";
+        y += 2 * utility.getTILESIZE();
+        if (selectNum == 1)
+            drawText(g, Color.YELLOW, 45, Font.PLAIN, text, y);
+        else
+            drawText(g, Color.WHITE, 45, Font.PLAIN, text, y);
+
+        text = "Quit";
+        y += 2 * utility.getTILESIZE();
+        if (selectNum == 2)
+            drawText(g, Color.YELLOW, 45, Font.PLAIN, text, y);
+        else
+            drawText(g, Color.WHITE, 45, Font.PLAIN, text, y);
     }
 
     private void drawPauseScreen(Graphics g) {
@@ -77,9 +111,9 @@ public class UserInterface {
         g.setColor(c);
         g.setFont(font);
         g.setFont(g.getFont().deriveFont(Font.BOLD, fontSize));
-        
+
         int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
-        int x = utility.getSCREENWIDTH() / 2 - length / 2;
+        int x = (utility.getSCREENWIDTH() / 2) - (length / 2);
 
         g.drawString(text, x, y);
     }
@@ -97,5 +131,13 @@ public class UserInterface {
 
     public void setCurrentDialogue(String dialogue) {
         currentDialogue = dialogue;
+    }
+
+    public int getSelectNum() {
+        return selectNum;
+    }
+
+    public void setSelectNum(int n) {
+        selectNum = Math.max(0, Math.min(n, 2));
     }
 }

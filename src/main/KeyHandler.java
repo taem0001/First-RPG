@@ -22,7 +22,25 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         int gameState = gamePanel.getGameState();
+        int selectNum = gamePanel.getUserInterface().getSelectNum();
 
+        if (gameState == utility.getTITLESTATE()) {
+            if (code == KeyEvent.VK_UP) {
+                gamePanel.getUserInterface().setSelectNum(selectNum - 1);
+            }
+            if (code == KeyEvent.VK_DOWN) {
+                gamePanel.getUserInterface().setSelectNum(selectNum + 1);
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                if (selectNum == 0) {
+                    gamePanel.setGameState(utility.getPLAYSTATE());
+                } else if (selectNum == 1) {
+
+                } else if (selectNum == 2) {
+                    gamePanel.stop();
+                }
+            }
+        }
         if (gameState == utility.getPLAYSTATE()) {
             if (code == KeyEvent.VK_UP) {
                 up = true;

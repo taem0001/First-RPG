@@ -15,6 +15,7 @@ public class Utility {
     private final int WORLDWIDTH = MAXSCREENCOL * TILESIZE;
     private final int WORLDHEIGHT = MAXSCREENROW * TILESIZE;
 
+    private final int TITLESTATE = 0;
     private final int PLAYSTATE = 1;
     private final int PAUSESTATE = 2;
     private final int DIALOGUESTATE = 3;
@@ -78,5 +79,9 @@ public class Utility {
 
     public int getDIALOGUESTATE() {
         return DIALOGUESTATE;
+    }
+
+    public int getTITLESTATE() {
+        return TITLESTATE;
     }
 }

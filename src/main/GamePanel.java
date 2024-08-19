@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(utility.getSCREENWIDTH(), utility.getSCREENHEIGHT()));
+        this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
@@ -38,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetManager.setObjects();
         assetManager.setNPC();
         // playMusic(1);
-        gameState = utility.getPLAYSTATE();
+        gameState = utility.getTITLESTATE();
     }
 
     public synchronized void start() {
@@ -71,6 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
                 e.printStackTrace();
             }
         }
+
+        System.exit(0);
     }
 
     private void update() {
@@ -90,23 +93,26 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        tileManager.draw(g);
-
-        for (SuperObject object : objects) {
-            if (object != null) {
-                object.draw(g, this);
+        if (gameState == utility.getTITLESTATE()) {
+            ui.draw((Graphics2D) g);
+        } else {
+            tileManager.draw(g);
+    
+            for (SuperObject object : objects) {
+                if (object != null) {
+                    object.draw(g, this);
+                }
             }
-        }
-
-        for (Entity npc : npcEntities) {
-            if (npc != null) {
-                npc.draw(g);
+    
+            for (Entity npc : npcEntities) {
+                if (npc != null) {
+                    npc.draw(g);
+                }
             }
+    
+            player.draw(g);
+            ui.draw((Graphics2D) g);
         }
-
-        player.draw(g);
-        ui.draw((Graphics2D) g);
-
         g.dispose();
     }
 
@@ -149,15 +155,15 @@ public class GamePanel extends JPanel implements Runnable {
         return running;
     }
 
+    public Entity[] getNpcEntities() {
+        return npcEntities;
+    }
+
     public int getGameState() {
         return gameState;
     }
 
-    public void setGameState(int state) {
-        gameState = state;
-    }
-
-    public Entity[] getNpcEntities() {
-        return npcEntities;
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
     }
 }
